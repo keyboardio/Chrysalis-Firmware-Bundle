@@ -1,4 +1,5 @@
-all: Technomancy/Atreus/firmware
+all: Technomancy/Atreus/firmware \
+     EZ/ErgoDox/firmware
 
 %/firmware:
 	@${MAKE} -C $* build
