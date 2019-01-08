@@ -30,8 +30,8 @@
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-Qukeys.h"
 
-#define Key_Hyper LALT(LSHIFT(LCTRL(Key_LeftGui)))
-#define Key_Meh   LALT(LSHIFT(Key_LeftControl))
+#define Key_Hyper LALT(LSHIFT(LCTRL(LGUI(Key_NoKey))))
+#define Key_Meh   LALT(LSHIFT(LCTRL(Key_NoKey)))
 
 /* *INDENT-OFF* */
 KEYMAPS(
