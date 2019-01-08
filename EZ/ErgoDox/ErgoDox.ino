@@ -28,7 +28,9 @@
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
+#include "Kaleidoscope-SpaceCadet.h"
 
 #define Key_Hyper LALT(LSHIFT(LCTRL(LGUI(Key_NoKey))))
 #define Key_Meh   LALT(LSHIFT(LCTRL(Key_NoKey)))
@@ -116,6 +118,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   FocusEEPROMCommand,
   FocusSettingsCommand,
+  OneShot,
+  SpaceCadet,
   MouseKeys,
   Qukeys
 );
