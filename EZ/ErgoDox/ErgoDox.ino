@@ -32,9 +32,6 @@
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
 
-#define Key_Hyper LCTRL(LSHIFT(LALT(Key_LeftGui)))
-#define Key_Meh   LCTRL(LSHIFT(Key_LeftAlt))
-
 /* *INDENT-OFF* */
 KEYMAPS(
   [0] = KEYMAP_STACKED
