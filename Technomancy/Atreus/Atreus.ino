@@ -98,7 +98,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   FocusEEPROMCommand,
   FocusSettingsCommand,
-  Macros
+  OneShot,
+  SpaceCadet,
+  MouseKeys,
+  Macros,
+  Qukeys
 );
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
@@ -120,6 +124,7 @@ void setup() {
   Kaleidoscope.setup();
 
   EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
+  SpaceCadet.disable();
 }
 
 void loop() {
