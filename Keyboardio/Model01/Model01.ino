@@ -223,6 +223,7 @@ void setup() {
 
   EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
   ColormapEffect.max_layers(3 + 5);
+  SpaceCadet.disable();
 }
 
 void loop() {

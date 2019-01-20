@@ -141,6 +141,7 @@ void setup() {
   Kaleidoscope.setup();
 
   EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
+  SpaceCadet.disable();
 
   blinkAllStatusLEDs();
 }
