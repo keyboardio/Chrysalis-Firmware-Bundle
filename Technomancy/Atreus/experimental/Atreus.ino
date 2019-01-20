@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * Atreus -- Default, Chrysalis-enabled Sketch for Technomancy's Atreus
+ * Atreus -- Chrysalis-enabled Sketch for Technomancy's Atreus (experimental)
  * Copyright (C) 2018, 2019  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify

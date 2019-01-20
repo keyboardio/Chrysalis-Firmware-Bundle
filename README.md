@@ -10,8 +10,8 @@ work.
  [chrysalis]: https://github.com/keyboardio/chrysalis-bundle-keyboardio
  [kaleidoscope]: https://github.com/keyboardio/Kaleidoscope
 
-All of the firmware sketches have at least the following plugins enabled, and
-have five editable layers set up:
+All of the experimental firmware sketches have at least the following plugins
+enabled, and have five editable layers set up:
 
 - [EEPROM-Keymap][plugin:EEPROM-Keymap]
 - [EEPROM-Settings][plugin:EEPROM-Settings]
@@ -20,6 +20,9 @@ have five editable layers set up:
 - [OneShot][plugin:OneShot]
 - [Qukeys][plugin:Qukeys]
 - [SpaceCadet][plugin:SpaceCadet]
+
+The default firmware is kept as close to the original as possible, and only
+those plugins are enabled in addition that are required for Chrysalis.
 
  [plugin:EEPROM-Keymap]: https://github.com/keyboardio/Kaleidoscope/blob/master/doc/plugin/EEPROM-Keymap.md#readme
  [plugin:EEPROM-Settings]: https://github.com/keyboardio/Kaleidoscope/blob/master/doc/plugin/EEPROM-Settings.md#readme

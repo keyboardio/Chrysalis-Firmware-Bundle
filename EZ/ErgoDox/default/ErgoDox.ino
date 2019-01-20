@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * ErgoDox -- Default, Chrysalis-enabled Sketch for ErgoDox-compatible boards
+ * ErgoDox -- Chrysalis-enabled Sketch for ErgoDox-compatible boards (minimal)
  * Copyright (C) 2019  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,9 +28,7 @@
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-MouseKeys.h"
-#include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
-#include "Kaleidoscope-SpaceCadet.h"
 
 /* *INDENT-OFF* */
 KEYMAPS(
@@ -115,10 +113,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   FocusEEPROMCommand,
   FocusSettingsCommand,
-  OneShot,
-  SpaceCadet,
-  MouseKeys,
-  Qukeys
+  Qukeys,
+  MouseKeys
 );
 
 void blinkAllStatusLEDs() {
@@ -141,7 +137,6 @@ void setup() {
   Kaleidoscope.setup();
 
   EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
-  SpaceCadet.disable();
 
   blinkAllStatusLEDs();
 }

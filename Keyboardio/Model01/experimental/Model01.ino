@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * ErgoDox -- Default, Chrysalis-enabled Sketch for Keyboardio Model01
+ * ErgoDox -- Chrysalis-enabled Sketch for Keyboardio Model01 (experimental)
  * Copyright (C) 2016-2019  Keyboard.io, Inc.
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -224,6 +224,7 @@ void setup() {
   EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
   ColormapEffect.max_layers(3 + 5);
   SpaceCadet.disable();
+  ActiveModColorEffect.highlightNormalModifiers(false);
 }
 
 void loop() {
