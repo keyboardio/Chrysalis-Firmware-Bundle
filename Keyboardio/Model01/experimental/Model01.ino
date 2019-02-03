@@ -221,7 +221,7 @@ void setup() {
 
   LEDOff.activate();
 
-  EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
+  EEPROMKeymap.setup(5);
   ColormapEffect.max_layers(3 + 5);
   SpaceCadet.disable();
   ActiveModColorEffect.highlightNormalModifiers(false);
