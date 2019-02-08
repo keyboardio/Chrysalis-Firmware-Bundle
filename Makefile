@@ -1,16 +1,19 @@
 all: default experimental
 
+BOARDS =                \
+	EZ/ErgoDox            \
+	Keyboardio/Model01    \
+	SOFTHRUF/Splitography \
+	Technomancy/Atreus
+
 default: message/default dirs   \
-	EZ/ErgoDox@default            \
-	Technomancy/Atreus@default    \
-  SOFTHRUF/Splitography@default \
-	Keyboardio/Model01@default
+	$(foreach board,${BOARDS},${board}@default)
 
 experimental: message/experimental dirs \
-	EZ/ErgoDox@experimental               \
-	Keyboardio/Model01@experimental       \
-	Technomancy/Atreus@experimental       \
-  SOFTHRUF/Splitography@experimental
+	$(foreach board,${BOARDS},${board}@experimental)
+
+${BOARDS}:
+	${MAKE} $@@default $@@experimental
 
 dirs:
 	install -d output
@@ -36,3 +39,4 @@ clean:
 	find . -type d -name 'output' | xargs rm -rf
 
 .SILENT:
+.PHONY: ${BOARDS}
