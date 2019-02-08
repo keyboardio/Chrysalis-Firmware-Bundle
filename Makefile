@@ -1,14 +1,16 @@
 all: default experimental
 
-default: message/default dirs \
-	EZ/ErgoDox@default          \
-	Technomancy/Atreus@default  \
+default: message/default dirs   \
+	EZ/ErgoDox@default            \
+	Technomancy/Atreus@default    \
+  SOFTHRUF/Splitography@default \
 	Keyboardio/Model01@default
 
 experimental: message/experimental dirs \
 	EZ/ErgoDox@experimental               \
 	Keyboardio/Model01@experimental       \
-	Technomancy/Atreus@experimental
+	Technomancy/Atreus@experimental       \
+  SOFTHRUF/Splitography@experimental
 
 dirs:
 	install -d output
