@@ -24,15 +24,21 @@ message/%:
 	echo "Building $* firmware sketches" | sed -e "s,.,=,g"
 	echo
 
+%@default: BUILDDIR := $(shell mktemp -d)
 %@default:
-	${MAKE} -C $*/default build
+	${MAKE} -C $*/default build \
+		KALEIDOSCOPE_OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="default"
 	install -d output/$*
-	cp -L $*/default/output/*/*-latest.hex output/$*/default.hex
+	cp -L ${BUILDDIR}/default/*-latest.hex output/$*/default.hex
+	rm -rf "${BUILDDIR}"
 
+%@experimental: BUILDDIR := $(shell mktemp -d)
 %@experimental:
-	${MAKE} -C $*/experimental build
+	${MAKE} -C $*/experimental build \
+		KALEIDOSCOPE_OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="experimental"
 	install -d output/$*
-	cp -L $*/experimental/output/*/*-latest.hex output/$*/experimental.hex
+	cp -L ${BUILDDIR}/experimental/*-latest.hex output/$*/experimental.hex
+	rm -rf "${BUILDDIR}"
 
 clean:
 	rm -rf output
