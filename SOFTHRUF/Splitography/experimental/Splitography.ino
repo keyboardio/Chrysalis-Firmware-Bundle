@@ -215,7 +215,7 @@ class MultiSwitcher : public kaleidoscope::Plugin {
  public:
   MultiSwitcher() {}
 
-  EventHandlerResult onKeyswitchEvent(Key &key, byte row, byte col, uint8_t key_state) {
+  EventHandlerResult onKeyswitchEvent(Key &key, KeyAddr key_addr, uint8_t key_state) {
     if (key < QWERTY_1 || key > QWERTY_2)
       return EventHandlerResult::OK;
 
