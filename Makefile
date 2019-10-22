@@ -16,6 +16,9 @@ experimental: message/experimental dirs \
 ${BOARDS}:
 	${MAKE} $@@default $@@experimental
 
+## The experimental firmware are optional, don't fail if we can't find any.
+.IGNORE: $(foreach board,${BOARDS},${board}@experimental)
+
 dirs:
 	install -d output
 
