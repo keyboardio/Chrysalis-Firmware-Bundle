@@ -538,6 +538,10 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(5);
+
+
+  // We disable SpaceCadet by default, on the principle of least surprise.
+  SpaceCadet.disable();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
