@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * ErgoDox -- Chrysalis-enabled Sketch for ErgoDox-compatible boards (minimal)
- * Copyright (C) 2019  Keyboard.io, Inc
+ * Copyright (C) 2019, 2020  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -119,16 +119,16 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
 void blinkAllStatusLEDs() {
   for (auto i = 0; i <= 3; i++) {
-    ErgoDox.setStatusLED(i, false);
+    Kaleidoscope.device().setStatusLED(i, false);
   }
 
   for (auto i = 1; i <= 3; i++) {
-    ErgoDox.setStatusLED(i, true);
+    Kaleidoscope.device().setStatusLED(i, true);
     _delay_ms(50);
   }
 
   for (auto i = 1; i <= 3; i++) {
-    ErgoDox.setStatusLED(i, false);
+    Kaleidoscope.device().setStatusLED(i, false);
     _delay_ms(50);
   }
 }

@@ -108,7 +108,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch (macroIndex) {
   case RESET:
-    Atreus.resetDevice();
+    Kaleidoscope.rebootBootloader();
     break;
   case QW:
     Layer.move(_QW);

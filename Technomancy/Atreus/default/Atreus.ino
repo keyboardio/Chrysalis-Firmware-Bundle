@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Atreus -- Chrysalis-enabled Sketch for Technomancy's Atreus (minimal)
- * Copyright (C) 2018, 2019  Keyboard.io, Inc
+ * Copyright (C) 2018, 2019, 2020  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -100,7 +100,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch (macroIndex) {
   case RESET:
-    Atreus.resetDevice();
+    Kaleidoscope.rebootBootloader();
     break;
   case QW:
     Layer.move(_QW);

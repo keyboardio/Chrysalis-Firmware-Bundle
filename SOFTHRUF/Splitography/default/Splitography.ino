@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Splitography-Sketch -- A complete, functional sketch for Splitography
- * Copyright (C) 2018  Gergely Nagy
+ * Copyright (C) 2018-2020  Gergely Nagy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,8 +43,8 @@ enum {
   QWERTY_2
 };
 
-#define QWERTY1 (Key){ .raw = QWERTY_1 }
-#define QWERTY2 (Key){ .raw = QWERTY_2 }
+#define QWERTY1 Key(QWERTY_1)
+#define QWERTY2 Key(QWERTY_2)
 
 #define MO(layer) ShiftToLayer(layer)
 #define TO(layer) LockLayer(layer)
@@ -216,7 +216,7 @@ class MultiSwitcher : public kaleidoscope::Plugin {
     if (key < QWERTY_1 || key > QWERTY_2)
       return EventHandlerResult::OK;
 
-    uint8_t bit = key.raw - QWERTY_1;
+    uint8_t bit = key.getRaw() - QWERTY_1;
 
     if (keyIsPressed(key_state)) {
       switch_state_ |= (1 << bit);
