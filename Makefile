@@ -2,7 +2,7 @@ all: default experimental
 
 BOARDS =                \
 	EZ/ErgoDox            \
-	Keyboardio/Atreus2    \
+	Keyboardio/Atreus     \
 	Keyboardio/Model01    \
 	SOFTHRUF/Splitography \
 	Technomancy/Atreus
