@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Atreus -- Chrysalis-enabled Sketch for Technomancy's Atreus (minimal)
- * Copyright (C) 2018, 2019, 2020  Keyboard.io, Inc
+ * Copyright (C) 2018, 2019  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,13 +20,13 @@
 #include "Kaleidoscope.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
-#include "Kaleidoscope-FlashHelper.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
+
 
 
 #define MO(n) ShiftToLayer(n)
@@ -96,7 +96,6 @@ KEYMAPS(
 /* *INDENT-ON* */
 
 KALEIDOSCOPE_INIT_PLUGINS(
-  FlashHelper,
   EEPROMSettings,
   EEPROMKeymap,
   Focus,
