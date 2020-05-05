@@ -443,9 +443,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   OneShot,
   Qukeys,
-
-  // SpaceCadet is currently disabled, due to space reasons.
-  //SpaceCadet,
+  SpaceCadet,
 
   // We start with the LED effect that turns off all the LEDs.
   LEDOff,
@@ -550,7 +548,7 @@ void setup() {
 
 
   // We disable SpaceCadet by default, on the principle of least surprise.
-  // SpaceCadet.disable(); // Disabled due to space reasons.
+  SpaceCadet.disable();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
