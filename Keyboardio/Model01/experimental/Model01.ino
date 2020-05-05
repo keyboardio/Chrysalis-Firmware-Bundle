@@ -72,6 +72,9 @@
 // Support for USB quirks, like changing the key state report protocol
 #include "Kaleidoscope-USB-Quirks.h"
 
+// Support for firmware-assisted flashing
+#include "Kaleidoscope-FlashHelper.h"
+
 // Experimental plugins
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
@@ -403,6 +406,10 @@ USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
+  // The FlashHelper plugin makes it possible to implement firmware-assisted
+  // flashing.
+  FlashHelper,
+
   // The EEPROMSettings & EEPROMKeymap plugins make it possible to have an
   // editable keymap in EEPROM.
   EEPROMSettings,
