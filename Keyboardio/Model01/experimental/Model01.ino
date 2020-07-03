@@ -462,7 +462,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The AlphaSquare effect prints each character you type, using your
   // keyboard's LEDs as a display
-  AlphaSquareEffect,
+  // TODO(anyone): Currently disabled to save space
+  // AlphaSquareEffect,
 
   // The stalker effect lights up the keys you've pressed recently
   StalkerEffect,
