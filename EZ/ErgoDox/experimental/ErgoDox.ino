@@ -115,10 +115,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   FocusEEPROMCommand,
   FocusSettingsCommand,
-  OneShot,
+  Qukeys,
   SpaceCadet,
+  OneShot,
   MouseKeys,
-  Qukeys
 );
 
 void blinkAllStatusLEDs() {

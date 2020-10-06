@@ -250,10 +250,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
     EEPROMKeymap,
     FocusEEPROMCommand,
     FocusSettingsCommand,
-    OneShot,
+    Qukeys,
     SpaceCadet,
+    OneShot,
     MouseKeys,
-    Qukeys
 );
 
 void setup() {
