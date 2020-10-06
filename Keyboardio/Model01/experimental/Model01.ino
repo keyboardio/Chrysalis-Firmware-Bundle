@@ -433,11 +433,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // LEDControl provides support for other LED modes
   LEDControl,
 
-  ActiveModColorEffect,
-
-  OneShot,
   Qukeys,
   SpaceCadet,
+  OneShot,
+
+  ActiveModColorEffect,
 
   // We start with the LED effect that turns off all the LEDs.
   LEDOff,
