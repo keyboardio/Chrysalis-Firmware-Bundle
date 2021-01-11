@@ -31,19 +31,23 @@ message/%:
 %@default: BUILDDIR := $(shell mktemp -d)
 %@default: BOARD := $(notdir $*)
 %@default:
-	${MAKE} -C $*/default/$(notdir $*) compile \
+	echo Building $*...
+	${MAKE} -s -C $*/default/$(notdir $*) compile \
 		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="default"
 	install -d output/$*
 	cp -L ${BUILDDIR}/*-latest.hex output/$*/default.hex
 	rm -rf "${BUILDDIR}"
+	echo
 
 %@experimental: BUILDDIR := $(shell mktemp -d)
 %@experimental:
-	${MAKE} -C $*/experimental/$(notdir $*) compile \
+	echo Building $*...
+	${MAKE} -s -C $*/experimental/$(notdir $*) compile \
 		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="experimental"
 	install -d output/$*
 	cp -L ${BUILDDIR}/*-latest.hex output/$*/experimental.hex
 	rm -rf "${BUILDDIR}"
+	echo
 
 clean:
 	rm -rf output
