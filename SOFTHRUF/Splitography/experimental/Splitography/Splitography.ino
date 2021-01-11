@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Splitography-Sketch -- A complete, functional sketch for Splitography
- * Copyright (C) 2018-2020  Gergely Nagy
+ * Copyright (C) 2018, 2020  Gergely Nagy
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,12 +19,15 @@
  *  https://github.com/sdothum/qmk_firmware/blob/d865c82efa19beb7cb593e7d3affb2311017833e/keyboards/splitography/keymaps/default/keymap.c
  */
 
-
 #include "Kaleidoscope.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
+#include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-OneShot.h"
+#include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Ranges.h"
+#include "Kaleidoscope-SpaceCadet.h"
 #include "Kaleidoscope-Steno.h"
 
 // Layers
@@ -34,7 +37,7 @@ enum {
   _ORANGE,
   _GREEN,
   _STENO,
-  _PLOVER,
+  _PLOVER
 };
 
 // Custom keys
@@ -201,8 +204,7 @@ KEYMAPS(
    ,QWERTY1  ,Key_Q ,Key_W ,Key_E ,Key_R ,Key_T    ,Key_Y ,Key_U ,Key_I ,Key_O ,Key_P         ,Key_LeftBracket
    ,QWERTY2  ,Key_A ,Key_S ,Key_D ,Key_F ,Key_G    ,Key_H ,Key_J ,Key_K ,Key_L ,Key_Semicolon ,Key_Quote
                                    ,Key_C ,Key_V    ,Key_N ,Key_M
-  ),
-
+  )
 );
 /* *INDENT-ON* */
 
@@ -246,12 +248,17 @@ KALEIDOSCOPE_INIT_PLUGINS(
     EEPROMSettings,
     EEPROMKeymap,
     FocusEEPROMCommand,
-    FocusSettingsCommand
+    FocusSettingsCommand,
+    Qukeys,
+    SpaceCadet,
+    OneShot,
+    MouseKeys
 );
 
 void setup() {
   Kaleidoscope.setup();
   EEPROMKeymap.setup(6);
+  SpaceCadet.disable();
 }
 
 void loop() {

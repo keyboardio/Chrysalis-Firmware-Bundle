@@ -102,7 +102,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   SpaceCadet,
   OneShot,
   Macros,
-  MouseKeys,
+  MouseKeys
 );
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {

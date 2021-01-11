@@ -105,7 +105,7 @@ KEYMAPS(
       XXX, XXX,
       XXX,
       XXX, XXX, XXX
-  ),
+  )
 )
 /* *INDENT-ON* */
 
@@ -118,7 +118,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Qukeys,
   SpaceCadet,
   OneShot,
-  MouseKeys,
+  MouseKeys
 );
 
 void blinkAllStatusLEDs() {
