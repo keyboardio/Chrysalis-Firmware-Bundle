@@ -113,8 +113,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   MouseKeys
 );
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  switch (macroIndex) {
+const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
+  switch (macro_id) {
   case MACRO_QWERTY:
     // This macro is currently unused, but is kept around for compatibility
     // reasons. We used to use it in place of `MoveToLayer(QWERTY)`, but no
@@ -123,7 +123,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
     Layer.move(QWERTY);
     break;
   case MACRO_VERSION_INFO:
-    if (keyToggledOn(keyState)) {
+    if (keyToggledOn(event.state)) {
       Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
       Macros.type(PSTR(BUILD_INFORMATION));
     }
