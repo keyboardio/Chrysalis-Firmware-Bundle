@@ -214,19 +214,19 @@ class MultiSwitcher : public kaleidoscope::Plugin {
  public:
   MultiSwitcher() {}
 
-  EventHandlerResult onKeyswitchEvent(Key &key, KeyAddr key_addr, uint8_t key_state) {
-    if (key < QWERTY_1 || key > QWERTY_2)
+  EventHandlerResult onKeyEvent(KeyEvent &event) {
+    if (event.key < QWERTY_1 || event.key > QWERTY_2)
       return EventHandlerResult::OK;
 
-    uint8_t bit = key.getRaw() - QWERTY_1;
+    uint8_t bit = event.key.getRaw() - QWERTY_1;
 
-    if (keyIsPressed(key_state)) {
+    if (keyToggledOn(event.state)) {
       switch_state_ |= (1 << bit);
 
       if (switch_state_ == (1 << 0 | 1 << 1)) {
         Layer.move(_QWERTY);
       }
-    } else if (keyToggledOff(key_state)) {
+    } else {
       switch_state_ &= ~(1 << bit);
     }
 

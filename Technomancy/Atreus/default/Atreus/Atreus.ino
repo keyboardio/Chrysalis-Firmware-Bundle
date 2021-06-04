@@ -97,8 +97,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Macros
 );
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  switch (macroIndex) {
+const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
+  switch (macro_id) {
   case RESET:
     Kaleidoscope.rebootBootloader();
     break;
