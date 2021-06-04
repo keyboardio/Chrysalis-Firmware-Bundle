@@ -447,13 +447,16 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The chase effect follows the adventure of a blue pixel which chases a red pixel across
   // your keyboard. Spoiler: the blue pixel never catches the red pixel
-  LEDChaseEffect,
+  // TODO(anyone): Currently disabled to save space
+  // LEDChaseEffect,
 
   // These static effects turn your keyboard's LEDs a variety of colors
-  //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
+  // TODO(anyone): Currently disabled to save space
+  // solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
 
   // The breathe effect slowly pulses all of the LEDs on your keyboard
-  LEDBreatheEffect,
+  // TODO(anyone): Currently disabled to save space
+  // LEDBreatheEffect,
 
   // The AlphaSquare effect prints each character you type, using your
   // keyboard's LEDs as a display
@@ -461,7 +464,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // AlphaSquareEffect,
 
   // The stalker effect lights up the keys you've pressed recently
-  StalkerEffect,
+  // TODO(anyone): Currently disabled to save space
+  // StalkerEffect,
 
   // The Colormap effect makes it possible to set up per-layer colormaps
   ColormapEffect,
@@ -507,7 +511,7 @@ void setup() {
   NumPad.numPadLayer = NUMPAD;
 
   // We configure the AlphaSquare effect to use RED letters
-  AlphaSquare.color = CRGB(255, 0, 0);
+  //AlphaSquare.color = CRGB(255, 0, 0);
 
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
@@ -517,7 +521,7 @@ void setup() {
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
   // https://github.com/keyboardio/Kaleidoscope/blob/master/doc/plugin/LED-Stalker.md
-  StalkerEffect.variant = STALKER(BlazingTrail);
+  //StalkerEffect.variant = STALKER(BlazingTrail);
 
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
