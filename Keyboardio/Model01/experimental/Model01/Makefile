@@ -2,7 +2,7 @@
 # required to build the example
 
 # Compile without deprecated code to save space
-LOCAL_CFLAGS ?= -DNDEPRECATED
+LOCAL_CFLAGS ?= -DNDEPRECATED -DONESHOT_WITHOUT_METASTICKY
 
 
 
