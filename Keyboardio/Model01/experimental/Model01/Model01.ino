@@ -33,7 +33,7 @@
 #include "Kaleidoscope-LEDControl.h"
 
 // Support for "Numpad" mode, which is mostly just the Numpad specific LED mode
-#include "Kaleidoscope-NumPad.h"
+// #include "Kaleidoscope-NumPad.h"
 
 // Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
 // when the keyboard is connected to a computer (or that computer is powered on)
@@ -46,7 +46,7 @@
 #include "Kaleidoscope-LEDEffect-Breathe.h"
 
 // Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
-#include "Kaleidoscope-LEDEffect-Chase.h"
+//#include "Kaleidoscope-LEDEffect-Chase.h"
 
 // Support for LED modes that pulse the keyboard's LED in a rainbow pattern
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
@@ -440,7 +440,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The chase effect follows the adventure of a blue pixel which chases a red pixel across
   // your keyboard. Spoiler: the blue pixel never catches the red pixel
-  LEDChaseEffect,
+  // LEDChaseEffect,
 
   // These static effects turn your keyboard's LEDs a variety of colors
   //solidRed, solidOrange, solidYellow, solidGreen, solidBlue, solidIndigo, solidViolet,
@@ -461,7 +461,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The numpad plugin is responsible for lighting up the 'numpad' mode
   // with a custom LED effect
-  NumPad,
+  // NumPad,
 
   // The macros plugin adds support for macros
   Macros,
@@ -497,7 +497,7 @@ void setup() {
 
   // While we hope to improve this in the future, the NumPad plugin
   // needs to be explicitly told which keymap layer is your numpad layer
-  NumPad.numPadLayer = NUMPAD;
+  // NumPad.numPadLayer = NUMPAD;
 
   // We configure the AlphaSquare effect to use RED letters
   // AlphaSquare.color = CRGB(255, 0, 0);
