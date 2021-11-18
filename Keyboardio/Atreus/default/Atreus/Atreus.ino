@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Atreus -- Chrysalis-enabled Sketch for the Keyboardio Atreus
- * Copyright (C) 2018, 2019  Keyboard.io, Inc
+ * Copyright (C) 2018-2021  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,11 +27,10 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
-
-
 
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
@@ -101,6 +100,7 @@ KEYMAPS(
 /* *INDENT-ON* */
 
 KALEIDOSCOPE_INIT_PLUGINS(
+  EscapeOneShot,
   EEPROMSettings,
   EEPROMKeymap,
   Focus,
@@ -110,7 +110,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   SpaceCadet,
   OneShot,
   Macros,
-  MouseKeys
+  MouseKeys,
+  EscapeOneShotConfig
 );
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {

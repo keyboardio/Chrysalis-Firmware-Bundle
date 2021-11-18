@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Splitography-Sketch -- A complete, functional sketch for Splitography
- * Copyright (C) 2018, 2020  Gergely Nagy
+ * Copyright (C) 2018-2021  Keyboard.io, Inc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-Ranges.h"
@@ -252,7 +253,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
     Qukeys,
     SpaceCadet,
     OneShot,
-    MouseKeys
+    MouseKeys,
+    EscapeOneShot,
+    EscapeOneShotConfig
 );
 
 void setup() {

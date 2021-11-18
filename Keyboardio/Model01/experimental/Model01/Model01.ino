@@ -70,6 +70,7 @@
 #include "Kaleidoscope-USB-Quirks.h"
 
 // Experimental plugins
+#include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
@@ -484,7 +485,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // by BIOSes) and Report (NKRO).
   USBQuirks,
 
-  LEDPaletteTheme
+  LEDPaletteTheme,
+
+  EscapeOneShot,
+  EscapeOneShotConfig
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.

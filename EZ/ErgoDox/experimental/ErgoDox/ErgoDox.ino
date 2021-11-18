@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * ErgoDox -- Chrysalis-enabled Sketch for ErgoDox-compatible boards (experimental)
- * Copyright (C) 2019, 2020  Keyboard.io, Inc
+ * Copyright (C) 2019-2021  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
@@ -118,7 +119,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Qukeys,
   SpaceCadet,
   OneShot,
-  MouseKeys
+  MouseKeys,
+  EscapeOneShot,
+  EscapeOneShotConfig
 );
 
 void blinkAllStatusLEDs() {
