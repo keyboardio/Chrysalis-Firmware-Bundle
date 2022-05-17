@@ -423,7 +423,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
 
   Qukeys,
-  SpaceCadet,
+  // TODO(anyone): Currently disabled to save space.
+  // SpaceCadet,
   OneShot,
 
   ActiveModColorEffect,
@@ -538,7 +539,7 @@ void setup() {
 
 
   // We disable SpaceCadet by default, on the principle of least surprise.
-  SpaceCadet.disable();
+  // SpaceCadet.disable();
 }
 
 /** loop is the second of the standard Arduino sketch functions.
