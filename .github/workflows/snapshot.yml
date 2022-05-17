@@ -1,0 +1,112 @@
+name: Snapshot build & publish
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  LC_ALL: C
+  ARDUINO_DIRECTORIES_USER: ${{ github.workspace }}/.arduino/user
+  KALEIDOSCOPE_DIR: ${{ github.workspace }}/.kaleidoscope
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    env:
+      COMMIT_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
+      - name: Collect the commit SHAs of the build
+        run: |
+          install -d output && \
+          cat >output/shas.txt <<EOF
+          Development snapshot, built using:
+            - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
+            - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
+          EOF
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmwares
+          path: |
+            output/
+
+  build-defaults:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache arduino dep downloads
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/.arduino/downloads
+          key: ${{ runner.os }}-arduino-downloads
+      - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
+      - run: (cd ${KALEIDOSCOPE_DIR} && make setup)
+      - run: git submodule update --init --recursive
+      - run: make default KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmwares
+          path: |
+            output/
+
+  build-experimental:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Cache arduino dep downloads
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/.arduino/downloads
+          key: ${{ runner.os }}-arduino-downloads
+      - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
+      - run: (cd ${KALEIDOSCOPE_DIR} && make setup)
+      - run: make experimental KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmwares
+          path: |
+            output/
+
+  publish:
+    needs: [ metadata, build-defaults, build-experimental ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Delete the snapshot release
+        uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true
+          tag_name: snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+
+      - name: Delete the snapshot tag locally too
+        shell: bash
+        run: git tag -d snapshot || true
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Recreate the snapshot release
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/shas.txt snapshot
+
+      - name: Package up the artifacts
+        shell: bash
+        run: tar -C artifacts/firmwares -cvf firmware-files.tar .
+
+      - name: Publish a snapshot
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        run: gh release upload snapshot firmware-files.tar
