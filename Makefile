@@ -16,9 +16,6 @@ experimental: message/experimental dirs \
 ${BOARDS}:
 	${MAKE} $@@default $@@experimental
 
-## The experimental firmware are optional, don't fail if we can't find any.
-.IGNORE: $(foreach board,${BOARDS},${board}@experimental)
-
 dirs:
 	install -d output
 
@@ -39,8 +36,17 @@ message/%:
 	rm -rf "${BUILDDIR}"
 	echo
 
-%@experimental: BUILDDIR := $(shell mktemp -d)
-%@experimental:
+%@experimental: %@experimental-dircheck
+	:
+%@experimental-dircheck:
+	if [ -d $*/experimental/$(notdir $*) ]; then \
+		${MAKE} -s $*@experimental/real; \
+	else \
+		echo "- No experimental firmware for $* -"; echo; echo; \
+	fi
+%@experimental/real: BUILDDIR := $(shell mktemp -d)
+%@experimental/real:
+	if [ ! -d $*/experimental/$(notdir $*) ]; then exit 0; fi
 	echo Building $*...
 	${MAKE} -s -C $*/experimental/$(notdir $*) compile \
 		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="experimental"
