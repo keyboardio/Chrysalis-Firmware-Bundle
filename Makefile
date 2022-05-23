@@ -33,7 +33,11 @@ message/%:
 	${MAKE} -s -C $*/default/$(notdir $*) compile \
 		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="default"
 	install -d output/$*
-	cp -L ${BUILDDIR}/*-latest.hex output/$*/default.hex
+	if [ -e ${BUILDDIR}/*-latest.bin ]; then \
+		cp -L ${BUILDDIR}/*-latest.bin output/$*/default.bin; \
+	else \
+		cp -L ${BUILDDIR}/*-latest.hex output/$*/default.hex; \
+	fi
 	rm -rf "${BUILDDIR}"
 	echo
 
@@ -52,7 +56,11 @@ message/%:
 	${MAKE} -s -C $*/experimental/$(notdir $*) compile \
 		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="experimental"
 	install -d output/$*
-	cp -L ${BUILDDIR}/*-latest.hex output/$*/experimental.hex
+	if [ -e ${BUILDDIR}/*-latest.bin ]; then \
+		cp -L ${BUILDDIR}/*-latest.bin output/$*/experimental.bin; \
+	else \
+		cp -L ${BUILDDIR}/*-latest.hex output/$*/experimental.hex; \
+	fi
 	rm -rf "${BUILDDIR}"
 	echo
 
