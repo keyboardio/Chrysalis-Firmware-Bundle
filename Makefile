@@ -4,6 +4,7 @@ BOARDS =                \
 	EZ/ErgoDox            \
 	Keyboardio/Atreus     \
 	Keyboardio/Model01    \
+  Keyboardio/Model100   \
 	SOFTHRUF/Splitography \
 	Technomancy/Atreus
 
