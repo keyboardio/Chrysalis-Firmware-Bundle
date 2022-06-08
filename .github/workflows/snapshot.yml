@@ -9,7 +9,7 @@ env:
   LC_ALL: C
   ARDUINO_DIRECTORIES_USER: ${{ github.workspace }}/.arduino/user
   KALEIDOSCOPE_DIR: ${{ github.workspace }}/.kaleidoscope
-  HARDWARE_DIR: ${ARDUINO_DIRECTORIES_USER}
+  HARDWARE_DIR: ${ARDUINO_DIRECTORIES_USER}/hardware/keyboardio
 jobs:
   metadata:
     runs-on: ubuntu-latest
