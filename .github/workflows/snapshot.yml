@@ -28,7 +28,7 @@ jobs:
       - name: Collect the commit SHAs of the build
         run: |
           install -d output && \
-          cat >output/shas.txt <<EOF
+          tee output/shas.txt <<EOF
           Development snapshot, built using:
             - keyboardio:avr@(cd ${HARDWARE_DIR}/avr; git rev-parse HEAD)
             - keyboardio:gd32@(cd ${HARDWARE_DIR}/gd32; git rev-parse HEAD)
