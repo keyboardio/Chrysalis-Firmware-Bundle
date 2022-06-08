@@ -125,7 +125,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/commit-message.md snapshot
 
-      - run: rm artifacts/firmwares/commit-mesage.md
+      - run: rm artifacts/firmwares/commit-message.md
 
       - name: Package up the artifacts
         shell: bash
