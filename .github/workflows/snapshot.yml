@@ -9,6 +9,7 @@ env:
   LC_ALL: C
   ARDUINO_DIRECTORIES_USER: ${{ github.workspace }}/.arduino/user
   KALEIDOSCOPE_DIR: ${{ github.workspace }}/.kaleidoscope
+  HARDWARE_DIR: ${ARDUINO_DIRECTORIES_USER}
 jobs:
   metadata:
     runs-on: ubuntu-latest
@@ -16,12 +17,21 @@ jobs:
       COMMIT_SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v3
+      - name: Cache arduino dep downloads
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/.arduino/downloads
+          key: ${{ runner.os }}-arduino-downloads
       - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
+      - run: (cd ${KALEIDOSCOPE_DIR} && make setup)
+      - run: git submodule update --init --recursive
       - name: Collect the commit SHAs of the build
         run: |
           install -d output && \
           cat >output/shas.txt <<EOF
           Development snapshot, built using:
+            - keyboardio:avr@(cd ${HARDWARE_DIR}/avr; git rev-parse HEAD)
+            - keyboardio:gd32@(cd ${HARDWARE_DIR}/gd32; git rev-parse HEAD)
             - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
             - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
           EOF
