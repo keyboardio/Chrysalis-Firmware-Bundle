@@ -44,7 +44,8 @@ jobs:
                 - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
                 - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
           EOF
-      - run: |
+      - name: Create the commit message
+        run: |
           cat >output/commit-message.md <<EOF
           ```yaml
           $(cat output/build-info.yml)
