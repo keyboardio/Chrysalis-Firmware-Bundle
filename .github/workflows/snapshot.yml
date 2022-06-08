@@ -28,12 +28,21 @@ jobs:
       - name: Collect the commit SHAs of the build
         run: |
           install -d output && \
-          tee output/shas.txt <<EOF
-          Development snapshot, built using:
-            - keyboardio:avr@$(cd ${HARDWARE_DIR}/avr; git rev-parse HEAD)
-            - keyboardio:gd32@$(cd ${HARDWARE_DIR}/gd32; git rev-parse HEAD)
-            - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
-            - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
+          tee output/build-info.yml <<EOF
+          build: ${GITHUB_RUN_NUMBER}
+
+          dependencies:
+            cores:
+              avr: keyboardio/Kaleidoscope-Bundle-Keyboardio@$(cd ${HARDWARE_DIR}/avr; git rev-parse HEAD)
+              gd32: keyboardio/ArduinoCore-GD32-Keyboardio@$(cd ${HARDWARE_DIR}/gd32; git rev-parse HEAD)
+            libraries:
+              avr:
+                - keyboardio/KeyboardioHID@$(cd ${HARDWARE_DIR)/avr/libraries/KeyboardioHID; git rev-parse HEAD)
+              gd32:
+                - keyboardio/KeyboardioHID@$(cd ${HARDWARE_DIR)/gd32/libraries/KeyboardioHID; git rev-parse HEAD)
+              common:
+                - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
+                - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
           EOF
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
@@ -109,7 +118,7 @@ jobs:
       - name: Recreate the snapshot release
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/shas.txt snapshot
+        run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/build-info.yml snapshot
 
       - name: Package up the artifacts
         shell: bash
