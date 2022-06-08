@@ -125,14 +125,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/commit-message.md snapshot
 
+      - run: rm artifacts/firmwares/commit-mesage.md
+
       - name: Package up the artifacts
         shell: bash
-        run: rm artifacts/firmwares/commit-mesage.md
         run: tar -C artifacts/firmwares -cvf firmware-files.tar .
 
-      - name: Publish a snapshot
+      - name: Upload the firmware files & build info to the snapshot
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release upload snapshot firmware-files.tar
-        run: gh release upload snapshot output/build-info.yml
+        run: gh release upload snapshot firmware-files.tar output/build-info.yml
