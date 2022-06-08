@@ -30,8 +30,8 @@ jobs:
           install -d output && \
           tee output/shas.txt <<EOF
           Development snapshot, built using:
-            - keyboardio:avr@(cd ${HARDWARE_DIR}/avr; git rev-parse HEAD)
-            - keyboardio:gd32@(cd ${HARDWARE_DIR}/gd32; git rev-parse HEAD)
+            - keyboardio:avr@$(cd ${HARDWARE_DIR}/avr; git rev-parse HEAD)
+            - keyboardio:gd32@$(cd ${HARDWARE_DIR}/gd32; git rev-parse HEAD)
             - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
             - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
           EOF
