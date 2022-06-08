@@ -44,6 +44,12 @@ jobs:
                 - keyboardio/Kaleidoscope@$(cd ${KALEIDOSCOPE_DIR}; git rev-parse HEAD)
                 - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
           EOF
+      - run: |
+          cat >output/commit-message.md <<EOF
+          ```yaml
+          $(cat output/build-info.yml)
+          ```
+          EOF
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -118,10 +124,11 @@ jobs:
       - name: Recreate the snapshot release
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/build-info.yml snapshot
+        run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/commit-message.md snapshot
 
       - name: Package up the artifacts
         shell: bash
+        run: rm artifacts/firmwares/commit-mesage.md
         run: tar -C artifacts/firmwares -cvf firmware-files.tar .
 
       - name: Publish a snapshot
@@ -129,3 +136,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         run: gh release upload snapshot firmware-files.tar
+        run: gh release upload snapshot output/build-info.yml
