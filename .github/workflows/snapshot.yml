@@ -45,9 +45,9 @@ jobs:
                 - keyboardio/Chrysalis-Firmware-Bundle@${COMMIT_SHA}
           EOF
           cat >output/commit-message.md <<EOF
-          ```yaml
+          \`\`\`yaml
           $(cat output/build-info.yml)
-          ```
+          \`\`\`
           EOF
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
