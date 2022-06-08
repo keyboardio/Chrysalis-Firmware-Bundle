@@ -135,4 +135,4 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release upload snapshot firmware-files.tar output/build-info.yml
+        run: gh release upload snapshot firmware-files.tar artifacts/firmwares/build-info.yml
