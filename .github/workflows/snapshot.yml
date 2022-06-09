@@ -22,7 +22,7 @@ jobs:
         with:
           path: ${{ github.workspace}}/.arduino/downloads
           key: ${{ runner.os }}-arduino-downloads
-      - run: tools/bootstrap.sh
+      - run: tools/bootstrap
       - name: Collect the commit SHAs of the build
         run: tools/collect-build-info
       - name: Upload artifacts
