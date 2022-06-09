@@ -1,0 +1,122 @@
+#! /bin/bash
+
+ARDUINO_DIRECTORIES_USER="${ARDUINO_DIRECTORIES_USER:-$(pwd)/.arduino/user}"
+HARDWARE_DIR="${HARDWARE_DIR:-${ARDUINO_DIRECTORIES_USER}/hardware/keyboardio}"
+KALEIDOSCOPE_DIR="${KALEIDOSCOPE_DIR:-$(pwd)/.kaleidoscope}"
+
+get_sha() {
+    sha_dir="$1"
+
+    (cd "${sha_dir}" && git rev-parse HEAD)
+}
+
+get_core_sha() {
+    get_sha "${HARDWARE_DIR}/$1"
+}
+
+get_core_lib_sha() {
+    get_sha "${HARDWARE_DIR}/$1/libraries/$2"
+}
+
+find_plugins_used_in_sketch() {
+    IFS_SAVE="${IFS}"
+    IFS="
+"
+    plugins=""
+    in_plugin_init=""
+    for line in $(cat "$1"); do
+        if [ -z "$in_plugin_init" ]; then
+            case "$line" in
+                KALEIDOSCOPE_INIT_PLUGINS*)
+                    in_plugin_init=1
+                    ;;
+                *)
+                    ;;
+            esac
+            continue
+        fi
+        case "$line" in
+            *//*)
+                ;;
+            *\)\;)
+                plugins="$plugins $line";
+                in_plugin_init=""
+                break
+                ;;
+            *)
+                plugins="$plugins $line"
+                ;;
+        esac
+    done
+    echo $plugins | tr -d ";)," | sed -e "s/  */\n/g" | grep -v "^[a-z]" | sort
+}
+
+collect_firmware_info() {
+    vendor="$1"
+    device="$2"
+    plugins="$(find_plugins_used_in_sketch $vendor/$device/experimental/$device/$device.ino)"
+
+    cat <<EOF
+    ${device}:
+      plugins:
+EOF
+    for plugin in ${plugins}; do
+        echo "        - ${plugin}"
+    done
+}
+
+collect_vendor_info() {
+    vendor="$1"
+    devices="$(find $vendor/ -maxdepth 1 -type d | sed -e "s,^$vendor/,,")"
+
+    echo "  $vendor:"
+    for device in $devices; do
+        collect_firmware_info $vendor $device
+    done
+}
+
+install -d output
+
+cat >output/release-notes.md <<EOF
+Chrysalis Firmware Bundle snapshot build #${GITHUB_RUN_NUMBER}.
+
+## Build Information
+
+| Architecture | Core |
+|:-------------|:-----|
+| AVR          | keyboardio/Kaleidoscope-Bundle-Keyboardio@$(get_core_sha avr) |
+| GD32         | keyboardio/ArduinoCore-GD32-Keyboardio@$(get_core_sha gd32) |
+
+### Libraries
+
+| Library | Link |
+|:--------|:-----|
+| KeyboardioHID (avr) | keyboardio/KeyboardioHID@$(get_core_lib_sha avr KeyboardioHID) |
+| KeyboardioHID (gd32) | keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID) |
+| Kaleidoscope | keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR}) |
+| Chrysalis-Firmware-Bundle | keyboardio/Chrysalis-Firmware-Bundle@$(get_sha .) |
+EOF
+
+cat >output/build-info.yml <<EOF
+---
+build: ${GITHUB_RUN_NUMBER}
+
+dependencies:
+  cores:
+    avr: keyboardio/Kaleidoscope-Bundle-Keyboardio@$(get_core_sha avr)
+    gd32: keyboardio/ArduinoCore-GD32-Keyboardio@$(get_core_sha gd32)
+  libraries:
+    avr:
+      - keyboardio/KeyboardioHID@$(get_core_lib_sha avr KeyboardioHID)
+    gd32:
+      - keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID)
+    common:
+      - keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR})
+      - keyboardio/Chrysalis-Firmware-Bundle@$(get_sha .)
+
+firmware:
+$(collect_vendor_info Keyboardio)
+$(collect_vendor_info EZ)
+$(collect_vendor_info Technomancy)
+$(collect_vendor_info SOFTHRUF)
+EOF
