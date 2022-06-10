@@ -54,7 +54,7 @@ find_plugins_used_in_sketch() {
 collect_firmware_info() {
     vendor="$1"
     device="$2"
-    plugins="$(find_plugins_used_in_sketch $vendor/$device/experimental/$device/$device.ino)"
+    plugins="$(find_plugins_used_in_sketch $vendor/$device/$device.ino)"
 
     cat <<EOF
     ${device}:
