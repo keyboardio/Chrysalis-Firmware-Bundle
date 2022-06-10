@@ -10,27 +10,15 @@ work.
  [chrysalis]: https://github.com/keyboardio/chrysalis-bundle-keyboardio
  [kaleidoscope]: https://github.com/keyboardio/Kaleidoscope
 
-All of the experimental firmware sketches have at least the following plugins
-enabled, and have five editable layers set up:
+While all sketches try to follow the original firmware each particular keyboard
+came with, they have additional - non-intrusive - plugins enabled, whenever
+circumstances permit.
 
-- [EEPROM-Keymap][plugin:EEPROM-Keymap]
-- [EEPROM-Settings][plugin:EEPROM-Settings]
-- [FocusSerial][plugin:FocusSerial]
-- [MouseKeys][plugin:MouseKeys]
-- [OneShot][plugin:OneShot]
-- [Qukeys][plugin:Qukeys]
-- [SpaceCadet][plugin:SpaceCadet]
+To get a list of plugins used by each firmware, run the
+`tools/collect-build-info` script, which will create a file called
+`output/build-info.yml`, which in turn will contain the plugin list per
+keyboard.
 
-The default firmware is kept as close to the original as possible, and only
-those plugins are enabled in addition that are required for Chrysalis.
-
- [plugin:EEPROM-Keymap]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/EEPROM-Keymap.md#readme
- [plugin:EEPROM-Settings]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/EEPROM-Settings.md#readme
- [plugin:FocusSerial]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/FocusSerial.md#readme
- [plugin:MouseKeys]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/MouseKeys.md#readme
- [plugin:OneShot]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/OneShot.md#readme
- [plugin:Qukeys]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/Qukeys.md#readme
- [plugin:SpaceCadet]: https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/SpaceCadet.md#readme
-
-Depending on the device, there may be other plugins enabled, please consult the
-sources for now.
+For guidelines about how we build these sketches, which plugins we enable, and
+so on, have a look at the [Chrysalis-enalbed
+Firmware](docs/chrysalis-enabled-firmware.md) documentation.
