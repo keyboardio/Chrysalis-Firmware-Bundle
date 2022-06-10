@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
- * Atreus -- Chrysalis-enabled Sketch for Technomancy's Atreus (minimal)
- * Copyright (C) 2018, 2019, 2020  Keyboard.io, Inc
+ * Atreus -- Chrysalis-enabled Sketch for Technomancy's Atreus
+ * Copyright (C) 2018-2022  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,16 @@
  */
 
 #include "Kaleidoscope.h"
+#include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
+#include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-OneShot.h"
+#include "Kaleidoscope-Qukeys.h"
+#include "Kaleidoscope-SpaceCadet.h"
 
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
@@ -89,12 +95,19 @@ KEYMAPS(
 /* *INDENT-ON* */
 
 KALEIDOSCOPE_INIT_PLUGINS(
+  EscapeOneShot,
   EEPROMSettings,
   EEPROMKeymap,
   Focus,
   FocusEEPROMCommand,
   FocusSettingsCommand,
-  Macros
+  Macros,
+  Qukeys,
+  SpaceCadet,
+  OneShot,
+  MouseKeys,
+  EscapeOneShotConfig,
+  DynamicMacros
 );
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
@@ -116,6 +129,8 @@ void setup() {
   Kaleidoscope.setup();
 
   EEPROMKeymap.setup(5);
+  SpaceCadet.disable();
+  DynamicMacros.reserve_storage(256);
 }
 
 void loop() {

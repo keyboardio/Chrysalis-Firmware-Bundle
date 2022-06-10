@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Splitography-Sketch -- A complete, functional sketch for Splitography
- * Copyright (C) 2018-2020  Gergely Nagy
+ * Copyright (C) 2018-2022  Keyboard.io, Inc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +21,16 @@
 
 
 #include "Kaleidoscope.h"
+#include "Kaleidoscope-Escape-OneShot.h"
+#include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
+#include "Kaleidoscope-MouseKeys.h"
+#include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Ranges.h"
+#include "Kaleidoscope-Qukeys.h"
+#include "Kaleidoscope-SpaceCadet.h"
 #include "Kaleidoscope-Steno.h"
 
 // Layers
@@ -239,18 +245,27 @@ class MultiSwitcher : public kaleidoscope::Plugin {
 kaleidoscope::plugin::MultiSwitcher MultiSwitcher;
 
 KALEIDOSCOPE_INIT_PLUGINS(
+    EscapeOneShot,
     GeminiPR,
     MultiSwitcher,
     Focus,
     EEPROMSettings,
     EEPROMKeymap,
     FocusEEPROMCommand,
-    FocusSettingsCommand
+    FocusSettingsCommand,
+    Qukeys,
+    SpaceCadet,
+    OneShot,
+    MouseKeys,
+    EscapeOneShotConfig,
+    DynamicMacros
 );
 
 void setup() {
   Kaleidoscope.setup();
   EEPROMKeymap.setup(6);
+  SpaceCadet.disable();
+  DynamicMacros.reserve_storage(256);
 }
 
 void loop() {
