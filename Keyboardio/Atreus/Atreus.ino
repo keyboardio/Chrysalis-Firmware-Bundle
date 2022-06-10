@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
  * Atreus -- Chrysalis-enabled Sketch for the Keyboardio Atreus
- * Copyright (C) 2018-2021  Keyboard.io, Inc
+ * Copyright (C) 2018, 2019  Keyboard.io, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,10 +27,10 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
-#include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
+
 
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
@@ -41,14 +41,14 @@ enum {
 };
 
 #define Key_Exclamation LSHIFT(Key_1)
-#define Key_At LSHIFT(Key_2)
-#define Key_Hash LSHIFT(Key_3)
-#define Key_Dollar LSHIFT(Key_4)
-#define Key_Percent LSHIFT(Key_5)
-#define Key_Caret LSHIFT(Key_6)
-#define Key_And LSHIFT(Key_7)
-#define Key_Star LSHIFT(Key_8)
-#define Key_Plus LSHIFT(Key_Equals)
+#define Key_At          LSHIFT(Key_2)
+#define Key_Hash        LSHIFT(Key_3)
+#define Key_Dollar      LSHIFT(Key_4)
+#define Key_Percent     LSHIFT(Key_5)
+#define Key_Caret       LSHIFT(Key_6)
+#define Key_And         LSHIFT(Key_7)
+#define Key_Star        LSHIFT(Key_8)
+#define Key_Plus        LSHIFT(Key_Equals)
 
 enum {
   QWERTY,
@@ -56,7 +56,7 @@ enum {
   UPPER
 };
 
-/* *INDENT-OFF* */
+// clang-format off
 KEYMAPS(
   [QWERTY] = KEYMAP_STACKED
   (
@@ -97,10 +97,9 @@ KEYMAPS(
       ,___      ,___           ,MoveToLayer(QWERTY) ,Key_PrintScreen ,Key_ScrollLock ,Consumer_PlaySlashPause
    )
 )
-/* *INDENT-ON* */
+// clang-format on
 
 KALEIDOSCOPE_INIT_PLUGINS(
-  EscapeOneShot,
   EEPROMSettings,
   EEPROMKeymap,
   Focus,
@@ -110,29 +109,26 @@ KALEIDOSCOPE_INIT_PLUGINS(
   SpaceCadet,
   OneShot,
   Macros,
-  MouseKeys,
-  EscapeOneShotConfig
-);
+  MouseKeys);
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
-  switch (macro_id) {
-  case MACRO_QWERTY:
-    // This macro is currently unused, but is kept around for compatibility
-    // reasons. We used to use it in place of `MoveToLayer(QWERTY)`, but no
-    // longer do. We keep it so that if someone still has the old layout with
-    // the macro in EEPROM, it will keep working after a firmware update.
-    Layer.move(QWERTY);
-    break;
-  case MACRO_VERSION_INFO:
-    if (keyToggledOn(event.state)) {
+  if (keyToggledOn(event.state)) {
+    switch (macro_id) {
+    case MACRO_QWERTY:
+      // This macro is currently unused, but is kept around for compatibility
+      // reasons. We used to use it in place of `MoveToLayer(QWERTY)`, but no
+      // longer do. We keep it so that if someone still has the old layout with
+      // the macro in EEPROM, it will keep working after a firmware update.
+      Layer.move(QWERTY);
+      break;
+    case MACRO_VERSION_INFO:
       Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
       Macros.type(PSTR(BUILD_INFORMATION));
+      break;
+    default:
+      break;
     }
-    break;
-  default:
-    break;
   }
-
   return MACRO_NONE;
 }
 
