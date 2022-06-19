@@ -25,6 +25,8 @@ jobs:
       - run: tools/bootstrap
       - name: Collect the commit SHAs of the build
         run: tools/collect-build-info
+      - name: Add the NEWS as a changelog to the artifacts
+        run: cp NEWS.md output/firmware-changelog.md
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -80,8 +82,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/release-notes.md snapshot
-
-      - run: rm artifacts/firmwares/release-notes.md
 
       - name: Package up the artifacts
         shell: bash
