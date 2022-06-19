@@ -31,6 +31,7 @@
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
+#include "Kaleidoscope-DynamicMacros.h"
 
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
@@ -110,6 +111,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   SpaceCadet,
   OneShot,
   Macros,
+  DynamicMacros,
   MouseKeys,
   EscapeOneShotConfig);
 
@@ -138,6 +140,8 @@ void setup() {
   Kaleidoscope.setup();
   SpaceCadet.disable();
   EEPROMKeymap.setup(10);
+
+  DynamicMacros.reserve_storage(128);
 
   Layer.move(EEPROMSettings.default_layer());
 }
