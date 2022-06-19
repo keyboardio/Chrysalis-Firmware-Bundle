@@ -107,7 +107,7 @@ Chrysalis Firmware Bundle snapshot build #${GITHUB_RUN_NUMBER}.
 
 # Changelog
 
-$(extract_current_news | tail -n +5)
+$(extract_current_news)
 EOF
 
 cat >output/build-info.yml <<EOF
