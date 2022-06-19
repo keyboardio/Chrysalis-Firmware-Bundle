@@ -75,6 +75,15 @@ collect_vendor_info() {
     done
 }
 
+extract_current_news() {
+    PREV_RELEASE_LINE=$(expr $(grep -n "^===" NEWS.md | head -n 2 | tail -n 1 | cut -d: -f1) - 3)
+    if [ ${PREV_RELEASE_LINE} == 2 ] || [ ${PREV_RELEASE_LINE} == -1 ]; then
+        PREV_RELEASE_LINE=$(wc -l NEWS.md | cut -d" " -f 1)
+    fi
+
+    head -n ${PREV_RELEASE_LINE} NEWS.md | tail -n +5
+}
+
 install -d output
 
 cat >output/release-notes.md <<EOF
@@ -95,6 +104,10 @@ Chrysalis Firmware Bundle snapshot build #${GITHUB_RUN_NUMBER}.
 | KeyboardioHID (gd32) | keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID) |
 | Kaleidoscope | keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR}) |
 | Chrysalis-Firmware-Bundle | keyboardio/Chrysalis-Firmware-Bundle@$(get_sha .) |
+
+# Changelog
+
+$(extract_current_news | tail -n +5)
 EOF
 
 cat >output/build-info.yml <<EOF
