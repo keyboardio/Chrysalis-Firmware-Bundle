@@ -88,6 +88,9 @@
 // Support for dynamic, Chrysalis-editable macros
 #include "Kaleidoscope-DynamicMacros.h"
 
+// Support for SpaceCadet keys
+#include "Kaleidoscope-SpaceCadet.h"
+
 /** This 'enum' is a list of all the macros used by the Model 100's firmware
   * The names aren't particularly important. What is important is that each
   * is unique.
@@ -441,6 +444,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EEPROMSettings,
   EEPROMKeymap,
 
+  // SpaceCadet can turn your shifts into parens on tap, while keeping them as
+  // Shifts when held.
+  SpaceCadet,
+
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
   Focus,
@@ -605,6 +612,9 @@ void setup() {
   // If there's a default layer set in EEPROM, we should set that as the default
   // here.
   Layer.move(EEPROMSettings.default_layer());
+
+  // To avoid any surprises, SpaceCadet is turned off by default.
+  SpaceCadet.disable();
 }
 
 /** loop is the second of the standard Arduino sketch functions.

@@ -44,12 +44,8 @@ Keyboardio Model100
 | NumPad                 | ✔       | ✔       | ✔            |
 | OneShot                | ✔       | ✔       | ✔            |
 | Qukeys                 | ✔       | ✔       | ✔            |
-| SpaceCadet             | :x:     | :x:     | ✔            |
+| SpaceCadet             | ✔       | :x:     | ✔            |
 | USBQuirks              | ✔       | ✔       | ✔            |
-
-The only real change with the Model100 is that - for the moment - the
-`SpaceCadet` plugin, formerly enabled in the "experimental" firmware - is no
-longer included.
 
 In the current firmware, there's enough space reserved for 5 layers (both for
 the keymap, and for colormap), and 1024 bytes for Dynamic Macros.
