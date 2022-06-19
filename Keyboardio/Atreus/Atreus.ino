@@ -138,6 +138,8 @@ void setup() {
   Kaleidoscope.setup();
   SpaceCadet.disable();
   EEPROMKeymap.setup(10);
+
+  Layer.move(EEPROMSettings.default_layer());
 }
 
 void loop() {

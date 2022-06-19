@@ -131,6 +131,7 @@ void setup() {
   EEPROMKeymap.setup(5);
   SpaceCadet.disable();
   DynamicMacros.reserve_storage(256);
+  Layer.move(EEPROMSettings.default_layer());
 }
 
 void loop() {

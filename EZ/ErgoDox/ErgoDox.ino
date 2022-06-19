@@ -150,6 +150,8 @@ void setup() {
   DynamicMacros.reserve_storage(256);
 
   blinkAllStatusLEDs();
+
+  Layer.move(EEPROMSettings.default_layer());
 }
 
 void loop() {
