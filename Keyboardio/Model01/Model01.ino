@@ -26,8 +26,9 @@
 // Support for keys that move the mouse
 #include "Kaleidoscope-MouseKeys.h"
 
-// Support for macros
+// Support for macros & dynamic macros
 #include "Kaleidoscope-Macros.h"
+#include "Kaleidoscope-DynamicMacros.h"
 
 // Support for controlling the keyboard's LEDs
 #include "Kaleidoscope-LEDControl.h"
@@ -51,12 +52,6 @@
 // Support for LED modes that pulse the keyboard's LED in a rainbow pattern
 #include "Kaleidoscope-LEDEffect-Rainbow.h"
 
-// Support for an LED mode that lights up the keys as you press them
-#include "Kaleidoscope-LED-Stalker.h"
-
-// Support for an LED mode that prints the keys you press in letters 4px high
-#include "Kaleidoscope-LED-AlphaSquare.h"
-
 // Support for shared palettes for other plugins, like Colormap below
 #include "Kaleidoscope-LED-Palette-Theme.h"
 
@@ -71,6 +66,9 @@
 
 // Support for magic combos (key chords that trigger an action)
 #include "Kaleidoscope-MagicCombo.h"
+
+// Support for secondary actions (one action when tapped, another when held)
+#include "Kaleidoscope-Qukeys.h"
 
 // Support for USB quirks, like changing the key state report protocol
 #include "Kaleidoscope-USB-Quirks.h"
@@ -473,13 +471,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The breathe effect slowly pulses all of the LEDs on your keyboard
   LEDBreatheEffect,
 
-  // The AlphaSquare effect prints each character you type, using your
-  // keyboard's LEDs as a display
-  AlphaSquareEffect,
-
-  // The stalker effect lights up the keys you've pressed recently
-  StalkerEffect,
-
   // The LED Palette Theme plugin provides a shared palette for other plugins,
   // like Colormap below
   LEDPaletteTheme,
@@ -491,11 +482,18 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // with a custom LED effect
   NumPad,
 
-  // The macros plugin adds support for macros
+  // The macros plugin adds support for macros, DynamicMacros does the same for
+  // Chrysalis-editable, dynamic ones.
   Macros,
+  DynamicMacros,
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   MouseKeys,
+
+  // Qukeys lets you add secondary actions to keys, such that they do their
+  // original action on tap, but another action (usually a modifier or a layer
+  // shift action) when held.
+  Qukeys,
 
   // The HostPowerManagement plugin allows us to turn LEDs off when then host
   // goes to sleep, and resume them when it wakes up.
@@ -525,9 +523,6 @@ void setup() {
   // needs to be explicitly told which keymap layer is your numpad layer
   NumPad.numPadLayer = NUMPAD;
 
-  // We configure the AlphaSquare effect to use RED letters
-  AlphaSquare.color = CRGB(255, 0, 0);
-
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
   LEDRainbowEffect.brightness(150);
@@ -535,11 +530,6 @@ void setup() {
 
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
-
-  // The LED Stalker mode has a few effects. The one we like is called
-  // 'BlazingTrail'. For details on other options, see
-  // https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/LED-Stalker.md
-  StalkerEffect.variant = STALKER(BlazingTrail);
 
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
@@ -557,6 +547,10 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(5);
+
+  // For Dynamic Macros, we need to reserve storage space for the editable
+  // macros.
+  DynamicMacros.reserve_storage(128);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
