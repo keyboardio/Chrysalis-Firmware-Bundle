@@ -25,6 +25,7 @@
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-Escape-OneShot.h"
+#include "Kaleidoscope-FirmwareVersion.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
@@ -113,7 +114,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Macros,
   DynamicMacros,
   MouseKeys,
-  EscapeOneShotConfig);
+  EscapeOneShotConfig,
+  FirmwareVersion);
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
   if (keyToggledOn(event.state)) {

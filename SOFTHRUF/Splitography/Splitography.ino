@@ -19,12 +19,12 @@
  *  https://github.com/sdothum/qmk_firmware/blob/d865c82efa19beb7cb593e7d3affb2311017833e/keyboards/splitography/keymaps/default/keymap.c
  */
 
-
 #include "Kaleidoscope.h"
 #include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-DynamicMacros.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope-FirmwareVersion.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-OneShot.h"
@@ -258,7 +258,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
     OneShot,
     MouseKeys,
     EscapeOneShotConfig,
-    DynamicMacros
+    DynamicMacros,
+    FirmwareVersion
 );
 
 void setup() {

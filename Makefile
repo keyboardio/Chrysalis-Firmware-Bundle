@@ -1,3 +1,11 @@
+VERSION="0.10.3"
+
+## Append the GitHub actions run number to the version number, if building under
+## GitHub Actions.
+ifdef GITHUB_RUN_NUMBER
+VERSION := "${VERSION}-build.${GITHUB_RUN_NUMBER}"
+endif
+
 BOARDS =                \
 	EZ/ErgoDox            \
 	Keyboardio/Atreus     \
@@ -22,7 +30,8 @@ ${BOARDS}: %: %@build
 %@build: BUILDDIR := $(shell mktemp -d)
 %@build:
 	echo "* Building $*"
-	${MAKE} -s -C $* compile OUTPUT_PATH=${BUILDDIR}
+	${MAKE} -s -C $* compile OUTPUT_PATH=${BUILDDIR} \
+				  LOCAL_CFLAGS="-DKALEIDOSCOPE_FIRMWARE_VERSION=\\\"${VERSION}\\\""
 	install -d output/$*
 	if [ -e ${BUILDDIR}/*-latest.bin ]; then \
 		cp -L ${BUILDDIR}/*-latest.bin output/$*/default.bin; \

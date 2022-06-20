@@ -28,6 +28,7 @@
 #include "Kaleidoscope-Escape-OneShot.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope-FirmwareVersion.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-OneShot.h"
@@ -123,7 +124,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EscapeOneShot,
   EscapeOneShotConfig,
   DynamicMacros,
-  MouseKeys
+  MouseKeys,
+  FirmwareVersion
 );
 
 void blinkAllStatusLEDs() {

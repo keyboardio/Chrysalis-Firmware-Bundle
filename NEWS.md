@@ -14,7 +14,9 @@ firmware size limitations, and our primary goal of not removing features
 compared to the former default sketches.
 
 On top of the reorganization, the firmware will now switch to the default layer
-(if any has been configured) when the keyboard starts up.
+(if any has been configured) when the keyboard starts up. A new Focus command
+(`version`) was also added to the sketches, which allows Chrysalis to query the
+version of the firmware running on the keyboard.
 
 For a full comparison for every keyboard, see the tables listing and comparing
 plugins enabled in each firmware below.
