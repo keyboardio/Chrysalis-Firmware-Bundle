@@ -13,6 +13,9 @@ could not enable all the plugins the former "experimental" firmware had, due to
 firmware size limitations, and our primary goal of not removing features
 compared to the former default sketches.
 
+On top of the reorganization, the firmware will now switch to the default layer
+(if any has been configured) when the keyboard starts up.
+
 For a full comparison for every keyboard, see the tables listing and comparing
 plugins enabled in each firmware below.
 
