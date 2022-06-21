@@ -1,5 +1,5 @@
-Chrysalis-Firmware-Bundle 0.10.3
-================================
+Chrysalis-Firmware-Bundle 0.10.3-snapshot
+=========================================
 **UNRELEASED**
 
 In this release, we're shipping one firmware per keyboard only. The former
