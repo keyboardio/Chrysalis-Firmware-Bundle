@@ -91,18 +91,18 @@ Chrysalis Firmware Bundle snapshot build #${GITHUB_RUN_NUMBER}.
 
 ## Build Information
 
-| Architecture | Core |
-|:-------------|:-----|
+| Architecture | Core                                                                               |
+|:-------------|:-----------------------------------------------------------------------------------|
 | AVR          | keyboardio/Kaleidoscope-Bundle-Keyboardio@$(get_core_sha avr) |
-| GD32         | keyboardio/ArduinoCore-GD32-Keyboardio@$(get_core_sha gd32) |
+| GD32         | keyboardio/ArduinoCore-GD32-Keyboardio@$(get_core_sha gd32)    |
 
 ### Libraries
 
-| Library | Link |
-|:--------|:-----|
-| KeyboardioHID (avr) | keyboardio/KeyboardioHID@$(get_core_lib_sha avr KeyboardioHID) |
-| KeyboardioHID (gd32) | keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID) |
-| Kaleidoscope | keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR}) |
+| Library                   | Link                                                                          |
+|:--------------------------|:------------------------------------------------------------------------------|
+| KeyboardioHID (avr)       | keyboardio/KeyboardioHID@$(get_core_lib_sha avr KeyboardioHID)             |
+| KeyboardioHID (gd32)      | keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID)             |
+| Kaleidoscope              | keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR})              |
 | Chrysalis-Firmware-Bundle | keyboardio/Chrysalis-Firmware-Bundle@$(get_sha .) |
 
 # Changelog
