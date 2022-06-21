@@ -46,7 +46,7 @@ jobs:
       - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
       - run: (cd ${KALEIDOSCOPE_DIR} && make setup)
       - run: git submodule update --init --recursive
-      - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
+      - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp EXTRA_VERSION="-snapshot.${GITHUB_RUN_NUMBER}"
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
