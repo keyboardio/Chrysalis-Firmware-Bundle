@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.10.3-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.10.3
+================================
+Released on 2022-07-06
 
 In this release, we're shipping one firmware per keyboard only. The former
 "default" and "experimental" distinction is gone. In the new versions, the goal
