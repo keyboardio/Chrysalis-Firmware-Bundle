@@ -74,7 +74,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
           VERSION: ${{ steps.version.outputs.tag }}
-        run: gh release create -p -t "Chrysalis Firmware Bundle ${VERSION}" -F artifacts/firmwares/release-notes.md v${VERSION}
+        run: gh release create -t "Chrysalis Firmware Bundle ${VERSION}" -F artifacts/firmwares/release-notes.md v${VERSION}
 
       - name: Package up the artifacts
         shell: bash
