@@ -1,0 +1,88 @@
+name: Publish production release
+
+on:
+  push:
+    tags:
+      - v*
+
+env:
+  LC_ALL: C
+  ARDUINO_DIRECTORIES_USER: ${{ github.workspace }}/.arduino/user
+  KALEIDOSCOPE_DIR: ${{ github.workspace }}/.kaleidoscope
+  HARDWARE_DIR: ${{ github.workspace }}/.arduino/user/hardware/keyboardio
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    env:
+      COMMIT_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache arduino dep downloads
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/.arduino/downloads
+          key: ${{ runner.os }}-arduino-downloads
+      - run: tools/bootstrap
+      - name: Collect the commit SHAs of the build
+        run: tools/collect-build-info
+      - name: Add the NEWS as a changelog to the artifacts
+        run: cp NEWS.md output/firmware-changelog.md
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmwares
+          path: |
+            output/
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache arduino dep downloads
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/.arduino/downloads
+          key: ${{ runner.os }}-arduino-downloads
+      - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
+      - run: (cd ${KALEIDOSCOPE_DIR} && make setup)
+      - run: git submodule update --init --recursive
+      - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp EXTRA_VERSION="+${GITHUB_RUN_NUMBER}"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: firmwares
+          path: |
+            output/
+
+  publish:
+    needs: [ metadata, build ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Discover the current release version
+        id: version
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
+
+      - name: Create the new release
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+          VERSION: ${{ steps.version.outputs.tag }}
+        run: gh release create -p -t "Chrysalis Firmware Bundle ${VERSION}" -F artifacts/firmwares/release-notes.md v${VERSION}
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Package up the artifacts
+        shell: bash
+        run: tar -C artifacts/firmwares -cvf firmware-files.tar .
+
+      - name: Upload the firmware files & build info to the snapshot
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+          VERSION: ${{ steps.version.outputs.tag }}
+        run: gh release upload v${VERSION} firmware-files.tar artifacts/firmwares/build-info.yml
