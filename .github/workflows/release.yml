@@ -65,16 +65,16 @@ jobs:
         id: version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
 
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
       - name: Create the new release
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
           VERSION: ${{ steps.version.outputs.tag }}
         run: gh release create -p -t "Chrysalis Firmware Bundle ${VERSION}" -F artifacts/firmwares/release-notes.md v${VERSION}
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
 
       - name: Package up the artifacts
         shell: bash
