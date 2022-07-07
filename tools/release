@@ -1,0 +1,166 @@
+#! /bin/bash
+set -eE -o pipefail
+
+COMMAND="${1:-help}"
+COMMAND="${COMMAND//-/_}"
+
+cfb_news_version() {
+    head -n 1 NEWS.md | cut -d" " -f 2
+}
+
+cfb_make_version() {
+    make version
+}
+
+cfb_push_changes() {
+    git push
+}
+
+## finalize
+
+cfb_verify_release_version() {
+    if [ "$(cfb_news_version)" != "$(cfb_make_version)" ]; then
+        cat >&2 <<EOF
+Package version ($(cfb_make_version)) does not match the version in NEWS.md ($(cfb_news_version)).
+
+Please add NEWS items for the upcoming release, and make sure the versions
+align.
+EOF
+    fi
+
+    case "$(cfb_make_version)" in
+        *-snapshot)
+        ;;
+        *)
+            cat >&2 <<EOF
+Package version is not a snapshot version. This script requires the version to
+be a snapshot version of the upcoming release.
+EOF
+            exit 1
+            ;;
+    esac
+}
+
+cfb_get_release_version() {
+    make version | cut -d- -f1
+}
+
+cfb_update_release_version() {
+    VERSION="$(cfb_get_release_version)"
+
+    ## Update the Makefile
+    sed -i "s,^VERSION=.*,VERSION=\"${VERSION}\"," Makefile
+
+    ## Update NEWS.md
+    TMP=$(mktemp)
+    VERSION_STRING="Chrysalis-Firmware-Bundle ${VERSION}"
+    (echo "${VERSION_STRING}"; \
+     echo "${VERSION_STRING}" | sed -e "s/./=/g"; \
+     tail -n +3 NEWS.md) >"${TMP}"
+    mv "${TMP}" NEWS.md
+}
+
+cfb_update_release_date() {
+    TMP=$(mktemp)
+    sed -e "s,\*\*UNRELEASED\*\*,Released on $(date +%Y-%m-%d)," <NEWS.md >${TMP}
+    mv "${TMP}" NEWS.md
+}
+
+cfb_commit_release_preparations() {
+    TMP=$(mktemp)
+    git add Makefile NEWS.md
+    cat >${TMP} <<EOF
+Preparations for Chrysalis-Firmware-Bundle $(cfb_make_version)
+
+Bump the version, and finalize the release date.
+EOF
+    git commit -s -F "${TMP}"
+    rm -f "${TMP}"
+}
+
+cfb_create_and_push_release_tag() {
+    VERSION=$(cfb_make_version)
+    git tag -a -s -m "Chrysalis-Firmware-Bundle ${VERSION} release." v${VERSION}
+    git push origin v${VERSION}
+}
+
+cfb_finalize() {
+    cfb_verify_release_version
+    cfb_update_release_version
+    cfb_update_release_date
+    cfb_commit_release_preparations
+    cfb_push_changes
+    cfb_create_and_push_release_tag
+}
+
+## create-snapshot
+
+cfb_verify_snapshot_version() {
+    case "$(cfb_make_version)" in
+        *-snapshot)
+            cat >&2 <<EOF
+Package version ($(cfb_make_version)) is not a tagged release. This script
+requires the version to be of a tagged release.
+EOF
+            exit 1
+        ;;
+        *)
+            ;;
+    esac
+}
+
+cfb_new_snapshot_version() {
+   VERSION="$(cfb_make_version)"
+
+   PATCH="$(echo "${VERSION}" | cut -d. -f3)"
+   MAJOR_MINOR="$(echo "${VERSION}" | cut -d. -f1-2)"
+
+   NEW_VERSION="${MAJOR_MINOR}.$(expr ${PATCH} + 1)-snapshot"
+
+   echo "${NEW_VERSION}"
+}
+
+cfb_update_snapshot_version() {
+    VERSION="$(cfb_new_snapshot_version)"
+
+    ## Update the Makefile
+    sed -i "s,^VERSION=.*,VERSION=\"${VERSION}\"," Makefile
+
+    ## Update NEWS.md
+    TMP=$(mktemp)
+    VERSION_STRING="Chrysalis-Firmware-Bundle ${VERSION}"
+    (echo "${VERSION_STRING}"; \
+     echo "${VERSION_STRING}" | sed -e "s/./=/g"; \
+     echo '**UNRELEASED**'; \
+     echo ; \
+     echo "No changes yet."; \
+     echo ; \
+     cat NEWS.md) >"${TMP}"
+    mv "${TMP}" NEWS.md
+}
+
+cfb_update_snapshot_readme() {
+    VERSION="$(cfb_make_version)"
+    sed -i -e "s,\(\[build:dev\]: .*/releases/tag/\).*,\1v${VERSION}," README.md
+}
+
+cfb_commit_snapshot_changes() {
+    VERSION="$(cfb_make_version)"
+    git add Makefile NEWS.md README.md
+    git commit -s -m "Bump version to ${VERSION}"
+}
+
+cfb_create_snapshot() {
+    cfb_verify_snapshot_version
+    cfb_update_snapshot_version
+    cfb_update_snapshot_readme
+    cfb_commit_snapshot_changes
+    cfb_push_changes
+}
+
+cfb_help() {
+    echo "Usage: $0 [finalize|create-snapshot]"
+    exit 0
+}
+
+cfb_${COMMAND}
