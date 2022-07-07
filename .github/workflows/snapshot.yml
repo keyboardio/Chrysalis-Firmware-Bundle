@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags-ignore:
+      - v*
 
 env:
   LC_ALL: C
@@ -62,16 +64,12 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Delete the snapshot release
-        uses: dev-drprasad/delete-tag-and-release@v0.2.0
-        with:
-          delete_release: true
-          tag_name: snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-
-      - name: Delete the snapshot tag locally too
         shell: bash
-        run: git tag -d snapshot || true
+        run: |
+          gh release delete -y v$(make version) || true
+          git tag -d v$(make version) || true
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
@@ -81,7 +79,11 @@ jobs:
       - name: Recreate the snapshot release
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release create -p -t "Chrysalis Firmware Bundle development snapshot" -F artifacts/firmwares/release-notes.md snapshot
+        run: |
+          gh release create -p \
+             -t "Chrysalis Firmware Bundle development snapshot" \
+             -F artifacts/firmwares/release-notes.md \
+             v$(make version)
 
       - name: Package up the artifacts
         shell: bash
@@ -91,4 +93,6 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release upload snapshot firmware-files.tar artifacts/firmwares/build-info.yml
+        run: |
+          gh release upload v$(make version) \
+             firmware-files.tar artifacts/firmwares/build-info.yml

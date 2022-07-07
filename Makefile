@@ -11,6 +11,9 @@ BOARDS =                \
 all: message output	$(foreach board,${BOARDS},${board}@build)
 	:
 
+version:
+	@echo "${VERSION}${EXTRA_VERSION}"
+
 output:
 	install -d output
 
@@ -40,4 +43,4 @@ clean:
 	find . -type d -name 'output' | xargs rm -rf
 
 .SILENT:
-.PHONY: ${BOARDS} clean all message
+.PHONY: ${BOARDS} clean all message version
