@@ -73,6 +73,7 @@ jobs:
         run: |
           gh release delete -y v$(make version) || true
           git tag -d v$(make version) || true
+          git push origin :v$(make version) || true
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
