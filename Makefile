@@ -1,4 +1,4 @@
-VERSION="0.10.4-snapshot"
+VERSION="0.10.4"
 
 BOARDS =                \
 	EZ/ErgoDox            \
