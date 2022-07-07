@@ -1,6 +1,18 @@
 Chrysalis Firmware Bundle
 =========================
 
+## Downloads
+
+[![Latest production builds][badge:production]][build:prod]
+[![Latest development builds][badge:development]][build:dev]
+
+ [badge:development]: https://img.shields.io/github/v/release/keyboardio/chrysalis-firmware-bundle?include_prereleases&label=Development&style=for-the-badge
+ [badge:production]: https://img.shields.io/github/v/release/keyboardio/chrysalis-firmware-bundle?label=Production&style=for-the-badge
+ [build:prod]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/latest
+ [build:dev]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/tag/v0.10.4-snapshot
+
+## About
+
 This is a collection of sketches for all the boards [Chrysalis][chrysalis]
 supports. These are the "Factory Firmware" sketches Chrysalis offers to flash.
 All of them are based on the layout the keyboards usually ship with, but built
