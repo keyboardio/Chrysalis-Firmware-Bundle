@@ -143,7 +143,7 @@ void setup() {
   SpaceCadet.disable();
   EEPROMKeymap.setup(10);
 
-  DynamicMacros.reserve_storage(128);
+  DynamicMacros.reserve_storage(48);
 
   Layer.move(EEPROMSettings.default_layer());
 }
