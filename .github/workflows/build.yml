@@ -1,15 +1,17 @@
-name: Publish production release
+name: Build & Publish
 
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - master
 
 env:
   LC_ALL: C
   ARDUINO_DIRECTORIES_USER: ${{ github.workspace }}/.arduino/user
   KALEIDOSCOPE_DIR: ${{ github.workspace }}/.kaleidoscope
   HARDWARE_DIR: ${{ github.workspace }}/.arduino/user/hardware/keyboardio
+  EXTRA_VERSION: ${{ github.run_number }}
+
 jobs:
   metadata:
     runs-on: ubuntu-latest
@@ -46,7 +48,7 @@ jobs:
       - run: git clone https://github.com/keyboardio/Kaleidoscope.git ${KALEIDOSCOPE_DIR}
       - run: (cd ${KALEIDOSCOPE_DIR} && make setup)
       - run: git submodule update --init --recursive
-      - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp EXTRA_VERSION="+${GITHUB_RUN_NUMBER}"
+      - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -61,28 +63,57 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Discover the current release version
+      - name: Discover the version tag
         id: version
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
+        run: echo ::set-output name=tag::$(make version-tag)
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
           path: artifacts
 
-      - name: Create the new release
+      - name: Delete the snapshot release
+        if: contains(steps.version.outputs.tag, "snapshot")
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          VERSION: ${{ steps.version.outputs.tag }}
-        run: gh release create -t "Chrysalis Firmware Bundle ${VERSION}" -F artifacts/firmwares/release-notes.md v${VERSION}
+          TAG: ${{ steps.version.outputs.tag }}
+        shell: bash
+        run: |
+          gh release delete -y ${TAG} || true
+          git tag -d ${TAG} || true
+          git push origin :${TAG} || true
+
+      - name: Recreate the snapshot release
+        if: contains(steps.version.outputs.tag, "snapshot")
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create -p \
+             -t "Chrysalis Firmware Bundle $(make version)" \
+             -F artifacts/firmwares/release-notes.md \
+             ${TAG}
+
+      - name: Create the new release
+        if: !contains(steps.version.outputs.tag, "snapshot")
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create \
+             -t "Chrysalis Firmware Bundle $(make version)" \
+             -F artifacts/firmwares/release-notes.md \
+             ${TAG}
 
       - name: Package up the artifacts
         shell: bash
-        run: tar -C artifacts/firmwares -cvf firmware-files.tar .
+        run: tar -C artifacts/firmwares -czvf firmware-files.tar.gz .
 
-      - name: Upload the firmware files & build info to the snapshot
+      - name: Upload the firmware files & build info to the release
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          VERSION: ${{ steps.version.outputs.tag }}
-        run: gh release upload v${VERSION} firmware-files.tar artifacts/firmwares/build-info.yml
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release upload ${TAG} \
+             firmware-files.tar.gz artifacts/firmwares/build-info.yml
