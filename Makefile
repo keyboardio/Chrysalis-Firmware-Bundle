@@ -1,5 +1,11 @@
 VERSION="0.10.5-snapshot"
 
+ifeq (${VERSION},$(subst -snapshot,,${VERSION}))
+	EMBEDDED_VERSION="${VERSION}+${EXTRA_VERSION}"
+else
+	EMBEDDED_VERSION="${VERSION}.${EXTRA_VERSION}"
+endif
+
 BOARDS =                \
 	EZ/ErgoDox            \
 	Keyboardio/Atreus     \
@@ -12,7 +18,10 @@ all: message output	$(foreach board,${BOARDS},${board}@build)
 	:
 
 version:
-	@echo "${VERSION}${EXTRA_VERSION}"
+	@echo "${EMBEDDED_VERSION}"
+
+version-tag:
+	@echo "v${VERSION}"
 
 output:
 	install -d output
@@ -28,7 +37,7 @@ ${BOARDS}: %: %@build
 %@build:
 	echo "* Building $*"
 	${MAKE} -s -C $* compile OUTPUT_PATH=${BUILDDIR} \
-				  LOCAL_CFLAGS="-DKALEIDOSCOPE_FIRMWARE_VERSION=\\\"${VERSION}${EXTRA_VERSION}\\\""
+				  LOCAL_CFLAGS="-DKALEIDOSCOPE_FIRMWARE_VERSION=\\\"${EMBEDDED_VERSION}\\\""
 	install -d output/$*
 	if [ -e ${BUILDDIR}/*-latest.bin ]; then \
 		cp -L ${BUILDDIR}/*-latest.bin output/$*/default.bin; \
@@ -43,4 +52,4 @@ clean:
 	find . -type d -name 'output' | xargs rm -rf
 
 .SILENT:
-.PHONY: ${BOARDS} clean all message version
+.PHONY: ${BOARDS} clean all message version version-tag
