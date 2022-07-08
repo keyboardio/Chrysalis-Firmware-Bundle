@@ -116,4 +116,6 @@ jobs:
           TAG: ${{ steps.version.outputs.tag }}
         run: |
           gh release upload ${TAG} \
-             firmware-files.tar.gz artifacts/firmwares/build-info.yml
+             firmware-files.tar.gz \
+             artifacts/firmwares/build-info.yml \
+             artifacts/firmwares/firmware-changelog.md
