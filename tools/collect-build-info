@@ -112,6 +112,7 @@ EOF
 
 cat >output/build-info.yml <<EOF
 ---
+version: $(make version)
 build: ${GITHUB_RUN_NUMBER}
 
 dependencies:
