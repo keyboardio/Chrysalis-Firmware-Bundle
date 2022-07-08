@@ -73,7 +73,7 @@ jobs:
           path: artifacts
 
       - name: Delete the snapshot release
-        if: contains(steps.version.outputs.tag, "snapshot")
+        if: ${{ contains(steps.version.outputs.tag, 'snapshot') }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
           TAG: ${{ steps.version.outputs.tag }}
@@ -84,7 +84,7 @@ jobs:
           git push origin :${TAG} || true
 
       - name: Recreate the snapshot release
-        if: contains(steps.version.outputs.tag, "snapshot")
+        if: ${{ contains(steps.version.outputs.tag, 'snapshot') }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
           TAG: ${{ steps.version.outputs.tag }}
@@ -95,7 +95,7 @@ jobs:
              ${TAG}
 
       - name: Create the new release
-        if: !contains(steps.version.outputs.tag, "snapshot")
+        if: ${{ !contains(steps.version.outputs.tag, 'snapshot') }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
           TAG: ${{ steps.version.outputs.tag }}
