@@ -2,7 +2,8 @@ Chrysalis-Firmware-Bundle 0.10.5-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+The Keyboardio Model 100 firmware now ships with the `LayerNames` plugin
+enabled, allowing Chrysalis to set custom layer names.
 
 Chrysalis-Firmware-Bundle 0.10.4
 ================================

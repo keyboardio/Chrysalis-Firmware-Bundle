@@ -94,6 +94,9 @@
 // Support for SpaceCadet keys
 #include "Kaleidoscope-SpaceCadet.h"
 
+// Support for editable layer names
+#include "Kaleidoscope-LayerNames.h"
+
 /** This 'enum' is a list of all the macros used by the Model 100's firmware
   * The names aren't particularly important. What is important is that each
   * is unique.
@@ -575,7 +578,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The FirmwareVersion plugin lets Chrysalis query the version of the firmware
   // programmatically.
-  FirmwareVersion);
+  FirmwareVersion,
+
+  // The LayerNames plugin allows Chrysalis to display - and edit - custom layer
+  // names, to be shown instead of the default indexes.
+  LayerNames);
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
  * It's called when your keyboard first powers up. This is where you set up
@@ -636,6 +643,11 @@ void setup() {
 
   // To avoid any surprises, SpaceCadet is turned off by default.
   SpaceCadet.disable();
+
+  // Editable layer names are stored in EEPROM too, and we reserve 16 bytes per
+  // layer for them. We need one extra byte per layer for bookkeeping, so we
+  // reserve 17 / layer in total.
+  LayerNames.reserve_storage(17 * 8);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
