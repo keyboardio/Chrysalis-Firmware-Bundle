@@ -33,6 +33,7 @@
 #include "Kaleidoscope-Qukeys.h"
 #include "Kaleidoscope-SpaceCadet.h"
 #include "Kaleidoscope-DynamicMacros.h"
+#include "Kaleidoscope-LayerNames.h"
 
 #define MO(n) ShiftToLayer(n)
 #define TG(n) LockLayer(n)
@@ -115,7 +116,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   DynamicMacros,
   MouseKeys,
   EscapeOneShotConfig,
-  FirmwareVersion);
+  FirmwareVersion,
+  LayerNames);
 
 const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
   if (keyToggledOn(event.state)) {
@@ -141,9 +143,11 @@ const macro_t *macroAction(uint8_t macro_id, KeyEvent &event) {
 void setup() {
   Kaleidoscope.setup();
   SpaceCadet.disable();
-  EEPROMKeymap.setup(10);
+  EEPROMKeymap.setup(9);
 
   DynamicMacros.reserve_storage(48);
+
+  LayerNames.reserve_storage(63);
 
   Layer.move(EEPROMSettings.default_layer());
 }
