@@ -5,7 +5,7 @@ Chrysalis-Firmware-Bundle 0.10.5-snapshot
 Keyboardio Model 100 & Atreus
 -----------------------------
 
-The Keyboardio Model 100 and Atreus firmwares now ships with the `LayerNames**
+The Keyboardio Model 100 and Atreus firmwares now ships with the `LayerNames`
 plugin enabled, allowing Chrysalis to set custom layer names.
 
 **NOTE**: In case of the Keyboardio Atreus, this required us to reduce the
