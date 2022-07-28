@@ -12,6 +12,13 @@ plugin enabled, allowing Chrysalis to set custom layer names.
 number of layers in the default firmware from 10 to 9, to free up some EEPROM
 space. This is a breaking change.
 
+Keyboardio Model 100
+--------------------
+
+The Arduino Core underpinning the Model 100 firmware has been updated to a new
+version, which further improves its serial communication. Model 100 owners are
+encouraged to upgrade their firmware.
+
 Chrysalis-Firmware-Bundle 0.10.4
 ================================
 Released on 2022-07-07
