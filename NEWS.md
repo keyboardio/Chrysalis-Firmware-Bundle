@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.11.0-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.11.0
+================================
+Released on 2022-07-28
 
 Keyboardio Model 100 & Atreus
 -----------------------------
