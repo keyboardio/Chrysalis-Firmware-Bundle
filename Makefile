@@ -1,4 +1,4 @@
-VERSION="0.10.5-snapshot"
+VERSION="0.11.0-snapshot"
 
 ifeq (${VERSION},$(subst -snapshot,,${VERSION}))
 	EMBEDDED_VERSION="${VERSION}+${EXTRA_VERSION}"

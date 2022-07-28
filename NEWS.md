@@ -1,4 +1,4 @@
-Chrysalis-Firmware-Bundle 0.10.5-snapshot
+Chrysalis-Firmware-Bundle 0.11.0-snapshot
 =========================================
 **UNRELEASED**
 
