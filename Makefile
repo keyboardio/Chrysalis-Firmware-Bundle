@@ -1,9 +1,13 @@
 VERSION="0.11.0-snapshot"
 
-ifeq (${VERSION},$(subst -snapshot,,${VERSION}))
-	EMBEDDED_VERSION="${VERSION}+${EXTRA_VERSION}"
+ifdef EXTRA_VERSION
+ ifeq (${VERSION},$(subst -snapshot,,${VERSION}))
+  EMBEDDED_VERSION="${VERSION}+${EXTRA_VERSION}"
+ else
+ 	EMBEDDED_VERSION="${VERSION}.${EXTRA_VERSION}"
+ endif
 else
-	EMBEDDED_VERSION="${VERSION}.${EXTRA_VERSION}"
+ EMBEDDED_VERSION="${VERSION}"
 endif
 
 BOARDS =                \
