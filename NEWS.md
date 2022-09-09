@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.11.1-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.11.1
+================================
+Released on 2022-09-09
 
 No changes in the sketches themselves, but all of them have been rebuilt with
 current Kaleidoscope.
