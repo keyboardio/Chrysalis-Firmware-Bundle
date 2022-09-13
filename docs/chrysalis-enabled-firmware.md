@@ -97,7 +97,7 @@ principle of least surprise should always be kept in mind.
  [plugin:eeprom-keymap]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-EEPROM-Keymap.html
  [plugin:colormap]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-Colormap.html
  [plugin:led-palette-theme]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-LED-Palette-Theme.html
- [plugins:ledcontrol]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-LEDControl.html
+ [plugin:led-control]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-LEDControl.html
  [plugin:host-power-management]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-HostPowerManagement.html
  [plugin:mousekeys]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-MouseKeys.html
  [plugin:qukeys]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-Qukeys.html
