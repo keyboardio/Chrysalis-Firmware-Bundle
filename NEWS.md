@@ -2,7 +2,12 @@ Chrysalis-Firmware-Bundle 0.11.2-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+Keyboardio Model 100
+--------------------
+
+The [DefaultLEDModeConfig][plugin:default-led-mode-config] plugin has been
+enabled for the Keyboardio Model 100 firmware. This lets Chrysalis configure a
+default LED mode for the keyboard to start up with.
 
 Chrysalis-Firmware-Bundle 0.11.1
 ================================

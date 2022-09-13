@@ -69,6 +69,9 @@
 // Support for turning the LEDs off after a certain amount of time
 #include "Kaleidoscope-IdleLEDs.h"
 
+// Support for setting and saving the default LED mode
+#include "Kaleidoscope-DefaultLEDModeConfig.h"
+
 // Support for Keyboardio's internal keyboard testing mode
 #include "Kaleidoscope-HardwareTestMode.h"
 
@@ -582,7 +585,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // The LayerNames plugin allows Chrysalis to display - and edit - custom layer
   // names, to be shown instead of the default indexes.
-  LayerNames);
+  LayerNames,
+
+  // Enables setting, saving (via Chrysalis), and restoring (on boot) the
+  // default LED mode.
+  DefaultLEDModeConfig);
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
  * It's called when your keyboard first powers up. This is where you set up
@@ -616,11 +623,6 @@ void setup() {
   // https://github.com/keyboardio/Kaleidoscope/blob/master/docs/plugins/LED-Stalker.md
   StalkerEffect.variant = STALKER(BlazingTrail);
 
-  // We want to make sure that the firmware starts with LED effects off
-  // This avoids over-taxing devices that don't have a lot of power to share
-  // with USB devices
-  LEDOff.activate();
-
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for eight layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
@@ -648,6 +650,11 @@ void setup() {
   // layer for them. We need one extra byte per layer for bookkeeping, so we
   // reserve 17 / layer in total.
   LayerNames.reserve_storage(17 * 8);
+
+  // Unless configured otherwise with Chrysalis, we want to make sure that the
+  // firmware starts with LED effects off. This avoids over-taxing devices that
+  // don't have a lot of power to share with USB devices
+  DefaultLEDModeConfig.activateLEDModeIfUnconfigured(&LEDOff);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
