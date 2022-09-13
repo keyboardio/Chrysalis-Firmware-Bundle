@@ -82,7 +82,7 @@ firmware we expect to ship with Chrysalis, roughly in order of importance:
   LEDs.
 - Automatically turning LEDs off after some time, via `IdleLEDs` and
   `PersistentIdleLEDs`, provided by th [IdleLEDs][plugin:idle-leds] plugin.
-- Chrysalis-editable macros via [DynamicMacros][plugins:dynamic-macros],
+- Chrysalis-editable macros via [DynamicMacros][plugin:dynamic-macros],
   configured to leave a fair amount of storage space available for macros, space
   permitting. Around 512 bytes is a reasonable minimum, with 4096 bytes being a
   very generous amount. At this time, more than 4k storage space reserved for
