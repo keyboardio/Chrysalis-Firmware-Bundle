@@ -100,6 +100,9 @@
 // Support for editable layer names
 #include "Kaleidoscope-LayerNames.h"
 
+// Support for the GeminiPR Stenography protocol
+#include "Kaleidoscope-Steno.h"
+
 /** This 'enum' is a list of all the macros used by the Model 100's firmware
   * The names aren't particularly important. What is important is that each
   * is unique.
@@ -589,7 +592,11 @@ KALEIDOSCOPE_INIT_PLUGINS(
 
   // Enables setting, saving (via Chrysalis), and restoring (on boot) the
   // default LED mode.
-  DefaultLEDModeConfig);
+  DefaultLEDModeConfig,
+
+  // Enables the GeminiPR Stenography protocol. Unused by default, but with the
+  // plugin enabled, it becomes configurable - and then usable - via Chrysalis.
+  GeminiPR);
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
  * It's called when your keyboard first powers up. This is where you set up

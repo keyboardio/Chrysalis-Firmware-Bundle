@@ -5,11 +5,16 @@ Chrysalis-Firmware-Bundle 0.11.2-snapshot
 Keyboardio Model 100
 --------------------
 
-The [DefaultLEDModeConfig][plugin:default-led-mode-config] plugin has been
-enabled for the Keyboardio Model 100 firmware. This lets Chrysalis configure a
-default LED mode for the keyboard to start up with.
+The Keyboardio Model 100 firmware had the following plugins added:
+
+- [DefaultLEDModeConfig][plugin:default-led-mode-config], which lets Chrysalis
+  configure a default LED mode for the keyboard to start up with.
+- [Steno][plugin:steno], making it possible to create a Steno layer via
+  Chrysalis, and use it with [Plover][plover].
 
  [plugin:default-led-mode-config]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-DefaultLEDModeConfig.html
+ [plugin:steno]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-Steno.html
+ [plover]: https://www.openstenoproject.org/plover/
 
 Chrysalis-Firmware-Bundle 0.11.1
 ================================
