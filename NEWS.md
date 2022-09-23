@@ -1,6 +1,10 @@
-Chrysalis-Firmware-Bundle 0.11.2-snapshot
+Chrysalis-Firmware-Bundle 0.90.0-snapshot
 =========================================
 **UNRELEASED**
+
+We are decoupling the firmware version from Chrysalis, to make it more
+straightforward to update them independently of each other. As such, the
+firmware version has been bumped to 0.90.0.
 
 Keyboardio Model 100
 --------------------
