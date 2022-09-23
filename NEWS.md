@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.90.0-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.90.0
+================================
+Released on 2022-09-23
 
 We are decoupling the firmware version from Chrysalis, to make it more
 straightforward to update them independently of each other. As such, the
