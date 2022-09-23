@@ -9,6 +9,8 @@ The [DefaultLEDModeConfig][plugin:default-led-mode-config] plugin has been
 enabled for the Keyboardio Model 100 firmware. This lets Chrysalis configure a
 default LED mode for the keyboard to start up with.
 
+ [plugin:default-led-mode-config]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-DefaultLEDModeConfig.html
+
 Chrysalis-Firmware-Bundle 0.11.1
 ================================
 Released on 2022-09-09
