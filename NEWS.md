@@ -6,6 +6,14 @@ We are decoupling the firmware version from Chrysalis, to make it more
 straightforward to update them independently of each other. As such, the
 firmware version has been bumped to 0.90.0.
 
+Bugfixes
+--------
+
+We fixed a bug in the `LayerNames` plugin that would lead to data corruption
+when setting custom layer names with Chrysalis. Even if not using custom layer
+names, we strongly recommend upgrading your firmware if you are using the
+Keyboardio Model 100, or the Keyboardio Atreus (where the plugin is enabled).
+
 Keyboardio Model 100
 --------------------
 
