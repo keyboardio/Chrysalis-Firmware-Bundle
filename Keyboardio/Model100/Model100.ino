@@ -471,8 +471,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EEPROMKeymap,
 
   // SpaceCadet can turn your shifts into parens on tap, while keeping them as
-  // Shifts when held.
+  // Shifts when held. SpaceCadetConfig lets Chrysalis configure some aspects of
+  // the plugin.
   SpaceCadet,
+  SpaceCadetConfig,
 
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
@@ -650,8 +652,10 @@ void setup() {
   // here.
   Layer.move(EEPROMSettings.default_layer());
 
-  // To avoid any surprises, SpaceCadet is turned off by default.
-  SpaceCadet.disable();
+  // To avoid any surprises, SpaceCadet is turned off by default. However, it
+  // can be permanently enabled via Chrysalis, so we should only disable it if
+  // no configuration exists.
+  SpaceCadetConfig.disableSpaceCadetIfUnconfigured();
 
   // Editable layer names are stored in EEPROM too, and we reserve 16 bytes per
   // layer for them. We need one extra byte per layer for bookkeeping, so we

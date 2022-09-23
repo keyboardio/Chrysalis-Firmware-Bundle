@@ -11,10 +11,14 @@ The Keyboardio Model 100 firmware had the following plugins added:
   configure a default LED mode for the keyboard to start up with.
 - [Steno][plugin:steno], making it possible to create a Steno layer via
   Chrysalis, and use it with [Plover][plover].
+- [SpaceCadetConfig][plugin:spacecadet], that makes it possible to permanently
+  enable the SpaceCadet feature via Chrysalis, making it practical to use the
+  plugin which has been included with the firmware for a while.
 
  [plugin:default-led-mode-config]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-DefaultLEDModeConfig.html
  [plugin:steno]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-Steno.html
  [plover]: https://www.openstenoproject.org/plover/
+ [plugin:spacecadet]: https://kaleidoscope.readthedocs.io/en/latest/plugins/Kaleidoscope-SpaceCadet.html
 
 Chrysalis-Firmware-Bundle 0.11.1
 ================================
