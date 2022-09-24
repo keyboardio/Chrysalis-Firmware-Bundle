@@ -2,7 +2,12 @@ Chrysalis-Firmware-Bundle 0.90.1-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+We have fixed a bug in the Arduino core used by the Keyboardio Model 100 which
+often led to data loss and/or data corruption when using the keyboard with
+Chrysalis.
+
+Keyboardio Model 100 owners are highly encouraged to upgrade to this version.
+Other keyboards are unaffected.
 
 Chrysalis-Firmware-Bundle 0.90.0
 ================================
