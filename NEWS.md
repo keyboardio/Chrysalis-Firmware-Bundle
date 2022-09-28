@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.90.2-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.90.2
+================================
+Released on 2022-09-28
 
 Keyboardio Model 100
 -------------------
