@@ -2,7 +2,15 @@ Chrysalis-Firmware-Bundle 0.90.2-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+Keyboardio Model 100
+-------------------
+
+Fixed a bug that prevented SpaceCadet from functioning properly. Once enabled
+(either via Chrysalis, or the SpaceCadet On key), it will now work as expected
+when tapped, and input the appropriate parenthesis.
+
+The LEDs now have gamma correction applied to them, to make the color
+distribution smoother.
 
 Chrysalis-Firmware-Bundle 0.90.1
 ================================
