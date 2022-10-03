@@ -1,3 +1,9 @@
+Chrysalis-Firmware-Bundle 0.90.3-snapshot
+=========================================
+**UNRELEASED**
+
+No changes yet.
+
 Chrysalis-Firmware-Bundle 0.90.2
 ================================
 Released on 2022-09-28
