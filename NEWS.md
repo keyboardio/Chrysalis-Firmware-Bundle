@@ -2,14 +2,18 @@ Chrysalis-Firmware-Bundle 0.90.3-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+Keyboardio Model 100
+--------------------
+
+The firmware now correctly recognizes when the host is suspended or goes to
+sleep, and will turn LEDs off accordingly.
 
 Chrysalis-Firmware-Bundle 0.90.2
 ================================
 Released on 2022-09-28
 
 Keyboardio Model 100
--------------------
+--------------------
 
 Fixed a bug that prevented SpaceCadet from functioning properly. Once enabled
 (either via Chrysalis, or the SpaceCadet On key), it will now work as expected
