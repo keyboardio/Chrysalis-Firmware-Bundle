@@ -66,6 +66,9 @@
 // Support for setting and saving the default LED mode
 #include "Kaleidoscope-DefaultLEDModeConfig.h"
 
+// Support for changing the brightness of the LEDs
+#include "Kaleidoscope-LEDBrightnessConfig.h"
+
 // Support for Keyboardio's internal keyboard testing mode
 #include "Kaleidoscope-HardwareTestMode.h"
 
@@ -589,6 +592,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // Enables setting, saving (via Chrysalis), and restoring (on boot) the
   // default LED mode.
   DefaultLEDModeConfig,
+
+  // Enables controlling (and saving) the brightness of the LEDs via Focus.
+  LEDBrightnessConfig,
 
   // Enables the GeminiPR Stenography protocol. Unused by default, but with the
   // plugin enabled, it becomes configurable - and then usable - via Chrysalis.
