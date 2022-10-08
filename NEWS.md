@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.90.4-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.90.4
+================================
+Released on 2022-10-08
 
 There are two major changes in this release, both of them affecting every
 keyboard, and both of them aimed at improving existing functionality, making

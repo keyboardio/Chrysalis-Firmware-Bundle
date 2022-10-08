@@ -1,4 +1,4 @@
-VERSION="0.90.4-snapshot"
+VERSION="0.90.4"
 
 ifdef EXTRA_VERSION
  ifeq (${VERSION},$(subst -snapshot,,${VERSION}))
