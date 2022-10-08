@@ -543,7 +543,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Macros,
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
+  // The MouseKeysConfig plugin lets Chrysalis configure some aspects of the
+  // plugin.
   MouseKeys,
+  MouseKeysConfig,
 
   // The HostPowerManagement plugin allows us to turn LEDs off when then host
   // goes to sleep, and resume them when it wakes up.
