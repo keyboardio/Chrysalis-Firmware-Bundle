@@ -8,7 +8,14 @@ Chrysalis-Firmware-Bundle 0.90.5
 ================================
 Released on 2022-10-09
 
-No changes yet.
+Keyboardio Model 100
+--------------------
+
+We have enabled the `MouseKeysConfig` plugin in the default firmware, which will
+allow Chrysalis to configure the plugin. At the time of this writing, Chrysalis
+can't do it yet, but the firmware will be ready for it once it does.
+
+The keyboard is now able to wake up a sleeping computer too.
 
 Chrysalis-Firmware-Bundle 0.90.4
 ================================
