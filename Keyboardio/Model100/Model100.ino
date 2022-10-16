@@ -570,6 +570,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // Enables the "Sticky" behavior for modifiers, and the "Layer shift when
   // held" functionality for layer keys.
   OneShot,
+  OneShotConfig,
   EscapeOneShot,
   EscapeOneShotConfig,
 
