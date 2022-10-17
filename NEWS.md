@@ -2,7 +2,27 @@ Chrysalis-Firmware-Bundle 0.90.6-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+Keyboardio Model 100 & Model 01
+-------------------------------
+
+When the host is going to sleep, turn the LEDs off. Previously, we only turned
+them off when the host was going through the suspended state, which *should*
+have been enough to turn them off on sleep too, but it wasn't. Now we explicitly
+turn it off during sleep too, just in case.
+
+Keyboardio Model 100
+--------------------
+
+Enabled the `OneShotConfig` plugin, which will let a future version of Chrysalis
+configure a number of settings related to the `OneShot` plugin, which implements
+the Sticky keys.
+
+Keyboardio Atreus
+-----------------
+
+Enabled the `SpaceCadetConfig`, `MouseKeysConfig`, and `OneShotConfig` plugins.
+With these enabled, Chrysalis is able to turn SpaceCadet on and off, configure
+mouse key speeds, and various sticky key related settings.
 
 Chrysalis-Firmware-Bundle 0.90.5
 ================================
