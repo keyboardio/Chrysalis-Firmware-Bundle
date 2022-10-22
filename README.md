@@ -9,7 +9,7 @@ Chrysalis Firmware Bundle
  [badge:development]: https://img.shields.io/github/v/release/keyboardio/chrysalis-firmware-bundle?include_prereleases&label=Development&style=for-the-badge
  [badge:production]: https://img.shields.io/github/v/release/keyboardio/chrysalis-firmware-bundle?label=Production&style=for-the-badge
  [build:prod]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/latest
- [build:dev]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/tag/v0.90.6-snapshot
+ [build:dev]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/tag/v0.91.0-snapshot
 
 ## About
 
