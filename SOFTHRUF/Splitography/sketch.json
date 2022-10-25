@@ -1,6 +1,0 @@
-{
-  "cpu": {
-    "fqbn": "keyboardio:avr:splitography",
-    "port": ""
-  }
-}

@@ -1,5 +1,10 @@
 VERSION="0.91.0-snapshot"
 
+export ARDUINO_DIRECTORIES_USER ?= ${CURDIR}/.arduino/user
+export ARDUINO_DIRECTORIES_DATA ?= ${CURDIR}/.arduino/data
+export HARDWARE_DIR             ?= ${ARDUINO_DIRECTORIES_USER}/hardware/keyboardio
+export KALEIDOSCOPE_DIR         ?= ${CURDIR}/lib/Kaleidoscope
+
 ifdef EXTRA_VERSION
  ifeq (${VERSION},$(subst -snapshot,,${VERSION}))
   EMBEDDED_VERSION="${VERSION}+${EXTRA_VERSION}"
@@ -55,5 +60,19 @@ clean:
 	rm -rf output
 	find . -type d -name 'output' | xargs rm -rf
 
+setup:
+	git submodule update --init --recursive
+	(cd ${KALEIDOSCOPE_DIR} && make setup)
+
+update:
+	git submodule update --init --recursive
+	(cd ${KALEIDOSCOPE_DIR} && make update)
+
+.env:
+	echo "ARDUINO_DIRECTORIES_USER=\"${ARDUINO_DIRECTORIES_USER}\"" >.env
+	echo "ARDUINO_DIRECTORIES_DATA=\"${ARDUINO_DIRECTORIES_DATA}\"" >>.env
+	echo "HARDWARE_DIR=\"${HARDWARE_DIR}\"" >>.env
+	echo "KALEIDOSCOPE_DIR=\"${KALEIDOSCOPE_DIR}\"" >>.env
+
 .SILENT:
-.PHONY: ${BOARDS} clean all message version version-tag
+.PHONY: ${BOARDS} clean all message version version-tag setup update .env

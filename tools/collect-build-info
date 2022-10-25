@@ -1,8 +1,7 @@
 #! /bin/bash
 
-ARDUINO_DIRECTORIES_USER="${ARDUINO_DIRECTORIES_USER:-$(pwd)/.arduino/user}"
-HARDWARE_DIR="${HARDWARE_DIR:-${ARDUINO_DIRECTORIES_USER}/hardware/keyboardio}"
-KALEIDOSCOPE_DIR="${KALEIDOSCOPE_DIR:-$(pwd)/.kaleidoscope}"
+make .env
+. ./.env
 
 get_sha() {
     sha_dir="$1"
