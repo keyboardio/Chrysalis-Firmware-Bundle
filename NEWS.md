@@ -2,7 +2,18 @@ Chrysalis-Firmware-Bundle 0.91.0-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+Keyboardio Model 100
+--------------------
+
+A number of firmware fixes have been implemented that attempt to mitigate
+Windows issues with missing or held keystrokes after a resume event.
+
+Keyboardio Atreus
+-----------------
+
+The firmware now correctly sets up the desired `SpaceCadet` mode, and no longer
+forces it off every time it is plugged in.
+
 
 Chrysalis-Firmware-Bundle 0.90.6
 ================================
