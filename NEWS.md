@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.91.1-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.91.1
+================================
+Released on 2023-05-05
 
 This release brings a large set of bugfixes, for every keyboard. Upgrading is
 highly recommended.
