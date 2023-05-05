@@ -66,7 +66,7 @@ EOF
 
 collect_vendor_info() {
     vendor="$1"
-    devices="$(find $vendor/ -maxdepth 1 -type d | sed -e "s,^$vendor/,,")"
+    devices="$(find -L $vendor/ -maxdepth 1 -type d | sed -e "s,^$vendor/,,")"
 
     echo "  $vendor:"
     for device in $devices; do
