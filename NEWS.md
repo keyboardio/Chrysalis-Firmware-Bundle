@@ -1,8 +1,13 @@
-Chrysalis-Firmware-Bundle 0.91.2-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.0
+================================
+Released on 2023-08-25 (then pulled and later republished)
 
-No changes yet.
+The big changes in this release are robustness improvements to the
+Focus protocol that lets your keyboard talk to Chrysalis. These
+changes include the addition of XON/XOFF flow control and fixes for
+a few parsing issues that could cause protocol deadlocks leading
+to the dreaded "Communications timeout" error.
+
 
 Chrysalis-Firmware-Bundle 0.91.1
 ================================
