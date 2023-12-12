@@ -1,3 +1,11 @@
+Chrysalis-Firmware-Bundle 0.92.1-snapshot
+=========================================
+
+Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers <evy@evybongers.nl>
+
+USB protocol Fixes for both AVR-based and GD32-based keyboards that may reduce "communications timeout" issues when talking to Chrysalis from Taylor Yu <code@argon.blue>
+
+
 Chrysalis-Firmware-Bundle 0.92.0
 ================================
 Released on 2023-08-25 (then pulled and later republished)
