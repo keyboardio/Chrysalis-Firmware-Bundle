@@ -60,7 +60,7 @@ jobs:
 
       - name: Discover the version tag
         id: version
-        run: echo ::set-output name=tag::$(make version-tag)
+        run: echo "{tag}={$(make version-tag)}" >> $GITHUB_STATE
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
