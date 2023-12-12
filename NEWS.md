@@ -1,5 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.1-snapshot
-=========================================
+Chrysalis-Firmware-Bundle 0.92.1
+================================
+Unreleased
 
 Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers <evy@evybongers.nl>
 
