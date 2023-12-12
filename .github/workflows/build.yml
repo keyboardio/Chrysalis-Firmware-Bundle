@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Cache arduino dep downloads
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ github.workspace}}/.arduino/downloads
           key: ${{ runner.os }}-arduino-downloads
@@ -27,7 +27,7 @@ jobs:
       - name: Add the NEWS as a changelog to the artifacts
         run: cp NEWS.md output/firmware-changelog.md
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: firmwares
           path: |
@@ -45,7 +45,7 @@ jobs:
       - run: make setup
       - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: firmwares
           path: |
