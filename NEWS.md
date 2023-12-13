@@ -4,7 +4,10 @@ Unreleased
 
 Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers <evy@evybongers.nl>
 
-USB protocol Fixes for both AVR-based and GD32-based keyboards that may reduce "communications timeout" issues when talking to Chrysalis from Taylor Yu <code@argon.blue>
+Focus Serial Protocol flow control bugfixes that may eliminate some "communications timeout" issues when talking to Chrysalis from Jesse Vincent <jesse@keyboard.io> and Taylor Yu <code@argon.blue>
+
+USB protocol Fixes for both AVR-based and GD32-based keyboards that may eliminate "communications timeout" issues when talking to Chrysalis from Taylor Yu <code@argon.blue>
+
 
 
 Chrysalis-Firmware-Bundle 0.92.0
