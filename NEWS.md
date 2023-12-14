@@ -2,12 +2,16 @@ Chrysalis-Firmware-Bundle 0.92.1
 ================================
 Unreleased
 
-Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers <evy@evybongers.nl>
+Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers
+<evy@evybongers.nl>
 
-Focus Serial Protocol flow control bugfixes that may eliminate some "communications timeout" issues when talking to Chrysalis from Jesse Vincent <jesse@keyboard.io> and Taylor Yu <code@argon.blue>
 
-USB protocol Fixes for both AVR-based and GD32-based keyboards that may eliminate "communications timeout" issues when talking to Chrysalis from Taylor Yu <code@argon.blue>
+USB protocol Fixes for both AVR-based and GD32-based keyboards that
+may eliminate "communications timeout" issues when talking to
+Chrysalis from Taylor Yu <code@argon.blue>
 
+Remove the Focus Serial XON/XOFF flow-control that turns out to not
+help in the way we thought it did.
 
 
 Chrysalis-Firmware-Bundle 0.92.0
