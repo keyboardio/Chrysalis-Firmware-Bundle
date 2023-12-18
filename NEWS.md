@@ -1,3 +1,9 @@
+Chrysalis-Firmware-Bundle 0.92.2-snapshot
+=========================================
+**UNRELEASED**
+
+No changes yet.
+
 Chrysalis-Firmware-Bundle 0.92.1
 ================================
 Unreleased
