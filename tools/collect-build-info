@@ -99,8 +99,6 @@ Chrysalis Firmware Bundle $(make version)
 
 | Library                   | Link                                                                          |
 |:--------------------------|:------------------------------------------------------------------------------|
-| KeyboardioHID (avr)       | keyboardio/KeyboardioHID@$(get_core_lib_sha avr KeyboardioHID)             |
-| KeyboardioHID (gd32)      | keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID)             |
 | Kaleidoscope              | keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR})              |
 | Chrysalis-Firmware-Bundle | keyboardio/Chrysalis-Firmware-Bundle@$(get_sha .) |
 
@@ -119,17 +117,10 @@ dependencies:
     avr: keyboardio/Kaleidoscope-Bundle-Keyboardio@$(get_core_sha avr)
     gd32: keyboardio/ArduinoCore-GD32-Keyboardio@$(get_core_sha gd32)
   libraries:
-    avr:
-      - keyboardio/KeyboardioHID@$(get_core_lib_sha avr KeyboardioHID)
-    gd32:
-      - keyboardio/KeyboardioHID@$(get_core_lib_sha gd32 KeyboardioHID)
     common:
       - keyboardio/Kaleidoscope@$(get_sha ${KALEIDOSCOPE_DIR})
       - keyboardio/Chrysalis-Firmware-Bundle@$(get_sha .)
 
 firmware:
 $(collect_vendor_info Keyboardio)
-$(collect_vendor_info EZ)
-$(collect_vendor_info Technomancy)
-$(collect_vendor_info SOFTHRUF)
 EOF
