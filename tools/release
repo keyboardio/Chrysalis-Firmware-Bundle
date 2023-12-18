@@ -49,7 +49,7 @@ cfb_update_release_version() {
     VERSION="$(cfb_get_release_version)"
 
     ## Update the Makefile
-    sed -i "s,^VERSION=.*,VERSION=\"${VERSION}\"," Makefile
+    perl -i -pe "s/^VERSION=.*/VERSION=\"${VERSION}\"/" Makefile
 
     ## Update NEWS.md
     TMP=$(mktemp)
@@ -124,7 +124,8 @@ cfb_update_snapshot_version() {
     VERSION="$(cfb_new_snapshot_version)"
 
     ## Update the Makefile
-    sed -i "s,^VERSION=.*,VERSION=\"${VERSION}\"," Makefile
+    perl -i -pe "s/^VERSION=.*/VERSION=\"${VERSION}\"/" Makefile
+
 
     ## Update NEWS.md
     TMP=$(mktemp)
@@ -141,7 +142,7 @@ cfb_update_snapshot_version() {
 
 cfb_update_snapshot_readme() {
     VERSION="$(cfb_make_version)"
-    sed -i -e "s,\(\[build:dev\]: .*/releases/tag/\).*,\1v${VERSION}," README.md
+    perl -i -pe "s{(\[build:dev\]: .*/releases/tag/).*}{\${1}v${VERSION}}" README.md
 }
 
 cfb_commit_snapshot_changes() {
