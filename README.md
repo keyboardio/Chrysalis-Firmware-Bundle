@@ -32,5 +32,5 @@ To get a list of plugins used by each firmware, run the
 keyboard.
 
 For guidelines about how we build these sketches, which plugins we enable, and
-so on, have a look at the [Chrysalis-enalbed
+so on, have a look at the [Chrysalis-enabled
 Firmware](docs/chrysalis-enabled-firmware.md) documentation.
