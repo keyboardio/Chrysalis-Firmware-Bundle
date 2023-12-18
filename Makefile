@@ -16,12 +16,9 @@ else
 endif
 
 BOARDS =                \
-	EZ/ErgoDox            \
 	Keyboardio/Atreus     \
 	Keyboardio/Model01    \
-  Keyboardio/Model100   \
-	SOFTHRUF/Splitography \
-	Technomancy/Atreus
+  	Keyboardio/Model100
 
 all: message output	$(foreach board,${BOARDS},${board}@build)
 	:

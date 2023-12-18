@@ -2,9 +2,9 @@ Chrysalis-Firmware-Bundle 0.92.1
 ================================
 Unreleased
 
+
 Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers
 <evy@evybongers.nl>
-
 
 USB protocol Fixes for both AVR-based and GD32-based keyboards that
 may eliminate "communications timeout" issues when talking to
@@ -12,6 +12,11 @@ Chrysalis from Taylor Yu <code@argon.blue>
 
 Remove the Focus Serial XON/XOFF flow-control that turns out to not
 help in the way we thought it did.
+
+Discontinued new firmware builds for non-Keyboardio keyboards. These
+builds were untested and unsupported. If you're an active user of
+one of these builds and are interested in providing ongoing support
+for them, please get in touch with jesse@keyboard.io
 
 
 Chrysalis-Firmware-Bundle 0.92.0
