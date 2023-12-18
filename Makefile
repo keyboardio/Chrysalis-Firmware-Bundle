@@ -16,12 +16,9 @@ else
 endif
 
 BOARDS =                \
-	EZ/ErgoDox            \
 	Keyboardio/Atreus     \
 	Keyboardio/Model01    \
-  Keyboardio/Model100   \
-	SOFTHRUF/Splitography \
-	Technomancy/Atreus
+  	Keyboardio/Model100
 
 all: message output	$(foreach board,${BOARDS},${board}@build)
 	:
@@ -68,11 +65,25 @@ update:
 	git submodule update --init --recursive
 	(cd ${KALEIDOSCOPE_DIR} && make update)
 
+
+pull-kaleidoscope: setup
+	(cd ${KALEIDOSCOPE_DIR}  && git fetch origin && git pull origin master)
+	git commit -s -m "Updated Kaleidoscope to origin/master" lib/Kaleidoscope 
+
 .env:
 	echo "ARDUINO_DIRECTORIES_USER=\"${ARDUINO_DIRECTORIES_USER}\"" >.env
 	echo "ARDUINO_DIRECTORIES_DATA=\"${ARDUINO_DIRECTORIES_DATA}\"" >>.env
 	echo "HARDWARE_DIR=\"${HARDWARE_DIR}\"" >>.env
 	echo "KALEIDOSCOPE_DIR=\"${KALEIDOSCOPE_DIR}\"" >>.env
+
+
+create-snapshot:
+	./tools/release create-snapshot
+
+
+finalize-release:
+	./tools/release finalize
+
 
 .SILENT:
 .PHONY: ${BOARDS} clean all message version version-tag setup update .env

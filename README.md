@@ -9,7 +9,7 @@ Chrysalis Firmware Bundle
  [badge:development]: https://img.shields.io/github/v/release/keyboardio/chrysalis-firmware-bundle?include_prereleases&label=Development&style=for-the-badge
  [badge:production]: https://img.shields.io/github/v/release/keyboardio/chrysalis-firmware-bundle?label=Production&style=for-the-badge
  [build:prod]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/latest
- [build:dev]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/tag/v0.91.2-snapshot
+ [build:dev]: https://github.com/keyboardio/Chrysalis-Firmware-Bundle/releases/tag/v0.92.1-snapshot
 
 ## About
 
@@ -32,5 +32,5 @@ To get a list of plugins used by each firmware, run the
 keyboard.
 
 For guidelines about how we build these sketches, which plugins we enable, and
-so on, have a look at the [Chrysalis-enalbed
+so on, have a look at the [Chrysalis-enabled
 Firmware](docs/chrysalis-enabled-firmware.md) documentation.
