@@ -3,8 +3,10 @@ name: Build & Publish
 on:
   push:
     branches:
-      - master
-
+      - '**'  # Runs on pushes to any branch
+  pull_request:
+    branches:
+      - '**'  # Runs on PRs targeting any branch
 env:
   LC_ALL: C
   EXTRA_VERSION: ${{ github.run_number }}
@@ -54,6 +56,8 @@ jobs:
   publish:
     needs: [ metadata, build ]
     runs-on: ubuntu-latest
+    # Ensure this job only runs on pushes to master branch
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/checkout@v3
