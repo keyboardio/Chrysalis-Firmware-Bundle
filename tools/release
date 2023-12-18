@@ -4,24 +4,21 @@ set -eE -o pipefail
 COMMAND="${1:-help}"
 COMMAND="${COMMAND//-/_}"
 
-cfb_news_version() {
-    head -n 1 NEWS.md | cut -d" " -f 2
-}
-
 cfb_make_version() {
     make version
 }
 
 cfb_push_changes() {
-    git push
+	git push
 }
 
 ## finalize
 
 cfb_verify_release_version() {
-    if [ "$(cfb_news_version)" != "$(cfb_make_version)" ]; then
+    news_version=`head -n 1 NEWS.md | cut -d" " -f 2`
+    if [ "${news_version}" != "$(cfb_make_version)" ]; then
         cat >&2 <<EOF
-Package version ($(cfb_make_version)) does not match the version in NEWS.md ($(cfb_news_version)).
+Package version ($(cfb_make_version)) does not match the version in NEWS.md (${news_version}).
 
 Please add NEWS items for the upcoming release, and make sure the versions
 align.
@@ -33,20 +30,22 @@ EOF
         ;;
         *)
             cat >&2 <<EOF
-Package version is not a snapshot version. This script requires the version to
-be a snapshot version of the upcoming release.
+It looks like you're trying to finalize a release when the labeled
+version in the Makefile isn't a -snapshot version.
+
+(The version in the Makefile is ($(cfb_make_version)).
+
+This script requires the version to be a snapshot version of the
+upcoming release.
 EOF
             exit 1
             ;;
     esac
 }
 
-cfb_get_release_version() {
-    make version | cut -d- -f1
-}
 
 cfb_update_release_version() {
-    VERSION="$(cfb_get_release_version)"
+    VERSION=$(make version | cut -d- -f1)
 
     ## Update the Makefile
     perl -i -pe "s/^VERSION=.*/VERSION=\"${VERSION}\"/" Makefile
@@ -78,7 +77,7 @@ EOF
     rm -f "${TMP}"
 }
 
-cfb_create_and_push_release_tag() {
+cfb_create_and_push_version_tag() {
     VERSION=$(cfb_make_version)
     git tag -a -s -m "Chrysalis-Firmware-Bundle ${VERSION} release." v${VERSION}
     git push origin v${VERSION}
@@ -90,7 +89,7 @@ cfb_finalize() {
     cfb_update_release_date
     cfb_commit_release_preparations
     cfb_push_changes
-    cfb_create_and_push_release_tag
+    cfb_create_and_push_version_tag
 }
 
 ## create-snapshot
@@ -99,8 +98,15 @@ cfb_verify_snapshot_version() {
     case "$(cfb_make_version)" in
         *-snapshot)
             cat >&2 <<EOF
-Package version ($(cfb_make_version)) is not a tagged release. This script
-requires the version to be of a tagged release.
+It looks like this is *already* a snapshot.
+
+Package version ($(cfb_make_version)) is not a tagged release. 
+This script requires the version to be of a tagged release.
+
+The release flow is that there is only ever one -snapshot 
+before a given release. Snapshots are not themselves versioned, 
+but are updated on every push.
+
 EOF
             exit 1
         ;;
@@ -125,7 +131,7 @@ cfb_update_snapshot_version() {
 
     ## Update the Makefile
     perl -i -pe "s/^VERSION=.*/VERSION=\"${VERSION}\"/" Makefile
-
+    git add Makefile
 
     ## Update NEWS.md
     TMP=$(mktemp)
@@ -138,16 +144,17 @@ cfb_update_snapshot_version() {
      echo ; \
      cat NEWS.md) >"${TMP}"
     mv "${TMP}" NEWS.md
+    git add NEWS.md
 }
 
 cfb_update_snapshot_readme() {
     VERSION="$(cfb_make_version)"
     perl -i -pe "s{(\[build:dev\]: .*/releases/tag/).*}{\${1}v${VERSION}}" README.md
+    git add README.md
 }
 
 cfb_commit_snapshot_changes() {
     VERSION="$(cfb_make_version)"
-    git add Makefile NEWS.md README.md
     git commit -s -m "Bump version to ${VERSION}"
 }
 
