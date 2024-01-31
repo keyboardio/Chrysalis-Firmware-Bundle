@@ -10,7 +10,6 @@ on:
 env:
   LC_ALL: C
   EXTRA_VERSION: ${{ github.run_number }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
