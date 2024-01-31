@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: firmware
+          name: firmware-build
           path: |
             output/
 
@@ -40,9 +40,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # Ensure this job only runs on pushes to master branch
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     env:
-      OUTPUT_DIR: artifacts/firmware
+      OUTPUT_DIR: artifacts/firmware-build
     steps:
       - uses: actions/checkout@v4
       - name: Discover the version tag
