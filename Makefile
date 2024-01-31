@@ -94,7 +94,7 @@ delete-tag-and-gh-release:
 
 create-gh-release:
 	gh release create -p \
-		-t "Chrysalis Firmware Bundle $(make version)" \
+		-t "Chrysalis Firmware Bundle $(EMBEDDED_VERSION)"\
 		-F ${OUTPUT_DIR}/release-notes.md \
 		${TAG}
 
