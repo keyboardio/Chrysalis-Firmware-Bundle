@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: firmwares
+          name: firmware
           path: |
             output/
 
@@ -42,7 +42,7 @@ jobs:
     # Ensure this job only runs on pushes to master branch
     if: github.ref == 'refs/heads/master'
     env:
-      OUTPUT_DIR: artifacts/firmwares
+      OUTPUT_DIR: artifacts/firmware
     steps:
       - uses: actions/checkout@v4
       - name: Discover the version tag
