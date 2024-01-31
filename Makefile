@@ -68,7 +68,7 @@ update:
 
 pull-kaleidoscope: setup
 	(cd ${KALEIDOSCOPE_DIR}  && git fetch origin && git pull origin master)
-	git commit -s -m "Updated Kaleidoscope to origin/master" lib/Kaleidoscope 
+	git commit -s -m "Updated Kaleidoscope to origin/master" lib/Kaleidoscope
 
 .env:
 	echo "ARDUINO_DIRECTORIES_USER=\"${ARDUINO_DIRECTORIES_USER}\"" >.env
@@ -80,9 +80,32 @@ pull-kaleidoscope: setup
 create-snapshot:
 	./tools/release create-snapshot
 
+collect-build-info:
+	./tools/collect-build-info
+
 
 finalize-release:
 	./tools/release finalize
+
+delete-tag-and-gh-release:
+	gh release delete -y ${TAG} || true
+	git tag -d ${TAG} || true
+	git push origin :${TAG} || true
+
+create-gh-release:
+	gh release create -p \
+		-t "Chrysalis Firmware Bundle $(make version)" \
+		-F ${OUTPUT_DIR}/release-notes.md \
+		${TAG}
+
+upload-gh-release:
+	gh release upload ${TAG} \
+		firmware-files.tar.gz \
+		${OUTPUT_DIR}/build-info.yml \
+		${OUTPUT_DIR}/firmware-changelog.md
+
+package-firmware-build:
+	tar -C ${OUTPUT_DIR} -czvf firmware-files.tar.gz .
 
 
 .SILENT:
