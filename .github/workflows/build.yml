@@ -16,9 +16,9 @@ jobs:
     env:
       COMMIT_SHA: ${{ github.sha }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Cache arduino dep downloads
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace}}/.arduino/downloads
           key: ${{ runner.os }}-arduino-downloads
@@ -44,7 +44,7 @@ jobs:
     env:
       OUTPUT_DIR: artifacts/firmwares
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Discover the version tag
         id: version
         run: |
