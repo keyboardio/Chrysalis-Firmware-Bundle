@@ -36,7 +36,8 @@ jobs:
           path: |
             output/
 
-  publish: [ build ]
+  publish:
+    needs: build
     runs-on: ubuntu-latest
     # Ensure this job only runs on pushes to master branch
     if: github.ref == 'refs/heads/master'
@@ -56,7 +57,7 @@ jobs:
           path: artifacts
 
       - name: Delete the snapshot release
-        if: ${{ contains(env.tag, 'snapshot') }}
+        if: ${{ contains(env.TAG, 'snapshot') }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         shell: bash
