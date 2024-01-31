@@ -2,11 +2,20 @@ Chrysalis-Firmware-Bundle 0.92.2-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+Switch to a hybrid keyboard report format, which @tlyu has built
+out and several end users have tested as performing better on a
+variety of temperamental operating systems that don't support NKRO.
+
+Adjust USBQuirks to switch between always Boot Protocol and the
+hybrid report.
+
+Internal changes which shouldn't be visible to users flashing
+updated firmware from Chrysalis.
+
 
 Chrysalis-Firmware-Bundle 0.92.1
 ================================
-Unreleased
+Released 2023-12-18
 
 
 Kaleidoscope has a new "ActiveLayerKeys" plugin from Evy Bongers
