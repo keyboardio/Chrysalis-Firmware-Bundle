@@ -10,111 +10,77 @@ on:
 env:
   LC_ALL: C
   EXTRA_VERSION: ${{ github.run_number }}
-
 jobs:
-  metadata:
+  build:
     runs-on: ubuntu-latest
     env:
       COMMIT_SHA: ${{ github.sha }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Discover the version tag
+        id: version
+        run: |
+          TAG=$(make version-tag)
+          echo "TAG=$TAG" >> $GITHUB_ENV
       - name: Cache arduino dep downloads
-        uses: actions/cache@v3
-        with:
-          path: ${{ github.workspace}}/.arduino/downloads
-          key: ${{ runner.os }}-arduino-downloads
-      - run: make setup
-      - name: Collect the commit SHAs of the build
-        run: tools/collect-build-info
-      - name: Add the NEWS as a changelog to the artifacts
-        run: cp NEWS.md output/firmware-changelog.md
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: firmwares
-          path: |
-            output/
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache arduino dep downloads
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace}}/.arduino/downloads
           key: ${{ runner.os }}-arduino-downloads
       - run: make setup
       - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
+      - name: Collect the commit SHAs of the build
+        run: make collect-build-info
+      - name: Add the NEWS as a changelog to the artifacts
+        run: cp NEWS.md output/firmware-changelog.md
+
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: firmwares
+          name: firmware-build
           path: |
             output/
 
   publish:
-    needs: [ metadata, build ]
+    needs: build
     runs-on: ubuntu-latest
     # Ensure this job only runs on pushes to master branch
     if: github.ref == 'refs/heads/master'
-
+    env:
+      OUTPUT_DIR: artifacts/firmware-build
     steps:
-      - uses: actions/checkout@v3
-
+      - uses: actions/checkout@v4
       - name: Discover the version tag
         id: version
-        run: echo ::set-output name=tag::$(make version-tag)
-
+        run: |
+          TAG=$(make version-tag)
+          echo "TAG=$TAG" >> $GITHUB_ENV
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
 
-      - name: Delete the snapshot release
-        if: ${{ contains(steps.version.outputs.tag, 'snapshot') }}
+      - name: Delete the snapshot release and update the tag
+        if: ${{ contains(env.TAG, 'snapshot') }}
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          TAG: ${{ steps.version.outputs.tag }}
         shell: bash
         run: |
-          gh release delete -y ${TAG} || true
-          git tag -d ${TAG} || true
-          git push origin :${TAG} || true
+          make update-tag-and-delete-gh-release
 
-      - name: Recreate the snapshot release
-        if: ${{ contains(steps.version.outputs.tag, 'snapshot') }}
+      - name: Create the release
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          TAG: ${{ steps.version.outputs.tag }}
         run: |
-          gh release create -p \
-             -t "Chrysalis Firmware Bundle $(make version)" \
-             -F artifacts/firmwares/release-notes.md \
-             ${TAG}
-
-      - name: Create the new release
-        if: ${{ !contains(steps.version.outputs.tag, 'snapshot') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-          TAG: ${{ steps.version.outputs.tag }}
-        run: |
-          gh release create \
-             -t "Chrysalis Firmware Bundle $(make version)" \
-             -F artifacts/firmwares/release-notes.md \
-             ${TAG}
-
+          make create-gh-release
       - name: Package up the artifacts
         shell: bash
-        run: tar -C artifacts/firmwares -czvf firmware-files.tar.gz .
+        run: |
+          make package-firmware-build
 
       - name: Upload the firmware files & build info to the release
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
-          TAG: ${{ steps.version.outputs.tag }}
         run: |
-          gh release upload ${TAG} \
-             firmware-files.tar.gz \
-             artifacts/firmwares/build-info.yml \
-             artifacts/firmwares/firmware-changelog.md
+          make upload-gh-release

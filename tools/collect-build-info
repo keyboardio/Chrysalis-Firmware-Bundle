@@ -86,7 +86,7 @@ extract_current_news() {
 install -d output
 
 cat >output/release-notes.md <<EOF
-Chrysalis Firmware Bundle $(make version)
+Chrysalis Firmware Bundle $(make --no-print-directory version)
 
 ## Build Information
 
@@ -109,7 +109,7 @@ EOF
 
 cat >output/build-info.yml <<EOF
 ---
-version: $(make version)
+version: $(make --no-print-directory version)
 build: ${GITHUB_RUN_NUMBER}
 
 dependencies:
