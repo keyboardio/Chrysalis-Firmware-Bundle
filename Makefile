@@ -59,7 +59,7 @@ clean:
 
 setup:
 	git submodule update --init --recursive
-	(cd ${KALEIDOSCOPE_DIR} && make setup)
+	(cd ${KALEIDOSCOPE_DIR} && make setup && make update)
 
 update:
 	git submodule update --init --recursive
