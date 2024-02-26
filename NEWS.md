@@ -19,6 +19,9 @@ Small memory optimizations in the Macros system
 Internal changes which shouldn't be visible to users flashing
 updated firmware from Chrysalis.
 
+Bugfixes for ZLP flow control in serial communcations on AVR based 
+keyboards like the Model 01 and Atreusfrom Taylor Yu
+<code@argon.blue>
 
 Chrysalis-Firmware-Bundle 0.92.1
 ================================
