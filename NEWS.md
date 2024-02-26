@@ -9,6 +9,13 @@ variety of temperamental operating systems that don't support NKRO.
 Adjust USBQuirks to switch between always Boot Protocol and the
 hybrid report.
 
+Bugfixes for the 'Prefix Layer' functionality from iliana etaoin.
+
+A bugfix to the Stalker LED effect that keeps the LED bright 
+while a key is held from Bart Nagel.
+
+Small memory optimizations in the Macros system
+
 Internal changes which shouldn't be visible to users flashing
 updated firmware from Chrysalis.
 
