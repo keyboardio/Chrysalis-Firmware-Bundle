@@ -2,6 +2,10 @@ Chrysalis-Firmware-Bundle 0.92.2-snapshot
 =========================================
 **UNRELEASED**
 
+If on-device storage was corruported, DynamicMacros could loop 
+forever while calculating macro metadata, making the keyboard 
+unusable.
+
 Switch to a hybrid keyboard report format, which @tlyu has built
 out and several end users have tested as performing better on a
 variety of temperamental operating systems that don't support NKRO.
