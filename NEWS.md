@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.2-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.2
+================================
+Released on 2024-02-29
 
 If on-device storage was corruported, DynamicMacros could loop 
 forever while calculating macro metadata, making the keyboard 
