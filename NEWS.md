@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.3-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.3
+================================
+Released on 2024-03-04
 
 Numerous fixes for error-checking issues that could cause a keyboard
 to lock up if invalid configuration data ended up in on-device storage.
