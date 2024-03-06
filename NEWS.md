@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.4-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.4
+================================
+Released on 2024-03-06
 
 
 0.92.3 introduced regressions that may have set your LED brightness to
