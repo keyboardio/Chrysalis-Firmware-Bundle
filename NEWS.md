@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.5-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.5
+================================
+Released on 2024-03-07
 
 This release is, somewhat embarassingly, a bugfix to the bugfix. 
 0.92.3 and 0.92.4 had trouble loading your on-keyboard settings
