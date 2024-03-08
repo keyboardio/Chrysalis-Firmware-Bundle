@@ -1,4 +1,4 @@
-VERSION="0.92.6-snapshot"
+VERSION="0.92.6"
 
 export ARDUINO_DIRECTORIES_USER ?= ${CURDIR}/.arduino/user
 export ARDUINO_DIRECTORIES_DATA ?= ${CURDIR}/.arduino/data

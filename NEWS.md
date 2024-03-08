@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.6-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.6
+================================
+Released on 2024-03-08
 
 Thanks to Nabi Yang, we caught another case that the previous bugfixes
 didn't address. 0.92.5 and earlier could, after a "factory reset"
