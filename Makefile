@@ -1,4 +1,4 @@
-VERSION="0.92.6"
+VERSION="0.92.7-snapshot"
 
 export ARDUINO_DIRECTORIES_USER ?= ${CURDIR}/.arduino/user
 export ARDUINO_DIRECTORIES_DATA ?= ${CURDIR}/.arduino/data
@@ -18,7 +18,8 @@ endif
 BOARDS =                \
 	Keyboardio/Atreus     \
 	Keyboardio/Model01    \
-  	Keyboardio/Model100
+  	Keyboardio/Model100  \
+  	Keyboardio/Preonic
 
 all: message output	$(foreach board,${BOARDS},${board}@build)
 	:
