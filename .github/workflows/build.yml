@@ -27,6 +27,7 @@ jobs:
         with:
           path: ${{ github.workspace}}/.arduino/downloads
           key: ${{ runner.os }}-arduino-downloads
+      - run: pip3 install --user adafruit-nrfutil
       - run: make setup
       - run: make all KALEIDOSCOPE_TEMP_PATH=${{ github.workspace}}/.kaleidoscope-temp
       - name: Collect the commit SHAs of the build
