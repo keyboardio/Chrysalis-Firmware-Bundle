@@ -42,11 +42,14 @@ ${BOARDS}: %: %@build
 
 %@build: BUILDDIR := $(shell mktemp -d)
 %@build:
-	echo "* Building $*"
+	echo "* Building $* into ${BUILDDIR}" 
 	${MAKE} -s -C $* compile OUTPUT_PATH=${BUILDDIR} \
 				  LOCAL_CFLAGS="-DKALEIDOSCOPE_FIRMWARE_VERSION=\\\"${EMBEDDED_VERSION}\\\""
 	install -d output/$*
-	if [ -e ${BUILDDIR}/*-latest.bin ]; then \
+	ls ${BUILDDIR}
+	if [ -e ${BUILDDIR}/Preonic.ino.zip ]; then \
+		cp -L ${BUILDDIR}/Preonic.ino.zip output/$*/default.zip; \
+	elif [ -e ${BUILDDIR}/*-latest.bin ]; then \
 		cp -L ${BUILDDIR}/*-latest.bin output/$*/default.bin; \
 	else \
 		cp -L ${BUILDDIR}/*-latest.hex output/$*/default.hex; \
