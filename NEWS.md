@@ -2,7 +2,20 @@ Chrysalis-Firmware-Bundle 0.92.8-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+This release focuses primarily on improvements for the Preonic keyboard, with important fixes for wireless connectivity and hardware functionality.
+
+Keyboardio Preonic
+-------------------
+
+If you're using a Preonic with Bluetooth, this update should significantly improve your wireless experience. We've fixed issues that could cause the keyboard to lose its ability to connect entirely, requiring you to re-pair the keyboard - and sometimes having trouble even with re-pairing. The keyboard should now maintain its connection more reliably.
+
+If you're still having Bluetooth connectivity issues after updating, you may need to pair your Preonic with your computer one more time.
+
+We've added a new bootup LED effect for the Preonic.
+
+We've also fixed an issue with the volume knob where it was sending two volume change events for every click instead of just one.
+
+Additionally, we've fixed mouse button clicks over Bluetooth when using the Preonic with macOS.
 
 Chrysalis-Firmware-Bundle 0.92.7
 ================================
