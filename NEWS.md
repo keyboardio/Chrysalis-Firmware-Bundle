@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.92.8-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.92.8
+================================
+Released on 2025-08-07
 
 This release focuses primarily on improvements for the Preonic keyboard, with important fixes for wireless connectivity and hardware functionality.
 
