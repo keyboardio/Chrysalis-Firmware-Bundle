@@ -1,8 +1,21 @@
-Chrysalis-Firmware-Bundle 0.92.9-snapshot
+Chrysalis-Firmware-Bundle 0.93.0-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+
+Keyboardio Preonic
+-------------------
+
+We've done a bunch more work to improve Bluetooth pairing reliability.
+
+We've added automatic USB/Bluetooth switching - your Preonic will now intelligently switch between USB and Bluetooth modes based on whether it detects a USB data connection.
+
+When you turn on your Preonic, if it's not connected to USB, it will try to connect to Bluetooth device #1.
+
+The LED indicator system now better shows USB and bluetooth connect and disconnect.
+
+We've shortened the boot greeting LED effect from 10 seconds to 5 seconds to be less intrusive.
+
 
 Chrysalis-Firmware-Bundle 0.92.8
 ================================
