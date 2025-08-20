@@ -1,6 +1,6 @@
-Chrysalis-Firmware-Bundle 0.93.0-snapshot
-=========================================
-**UNRELEASED**
+Chrysalis-Firmware-Bundle 0.93.0
+================================
+Released on 2025-08-19
 
 
 Keyboardio Preonic
