@@ -1,8 +1,8 @@
-Chrysalis-Firmware-Bundle 0.93.1-snapshot
+Chrysalis-Firmware-Bundle 0.94.0-snapshot
 =========================================
 **UNRELEASED**
 
-No changes yet.
+This update SHOULD resolve issues where the Preonic stopped being able to send keystrokes to a Windows 11 system on reconnect, even though it showed as connected. You will need to re-pair your computer and your Preonic after updating to pick up this fix.
 
 Chrysalis-Firmware-Bundle 0.93.0
 ================================
